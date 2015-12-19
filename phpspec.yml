@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: Spaceport
+        psr4_prefix: Spaceport
+        src_path: app
