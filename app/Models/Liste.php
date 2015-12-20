@@ -4,12 +4,17 @@ namespace Spaceport\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Listing extends Model
+class Liste extends Model
 {
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'lists';
+    protected $table = 'listes';
+
+    public function columns()
+    {
+        return $this->hasMany(Column);
+    }
 }

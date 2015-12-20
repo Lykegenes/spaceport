@@ -1,9 +1,8 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 
-class CreateListsTable extends Migration
+class CreateItemsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,9 +11,10 @@ class CreateListsTable extends Migration
      */
     public function up()
     {
-        Schema::create('lists', function (Blueprint $table) {
+        Schema::create('items', function ($table) {
             $table->increments('id');
-            $table->string('name');
+            $table->integer('listes_id');
+            $table->string('title');
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ class CreateListsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('lists');
+        Schema::drop('items');
     }
 }
