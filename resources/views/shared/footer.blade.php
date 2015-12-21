@@ -2,8 +2,8 @@
 <footer class="main-footer">
     <!-- To the right -->
     <div class="pull-right hidden-xs">
-        Anything you want
+        <b>Version</b> 0.0.1
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2015 <a href="#">Patrick Samson</a>.</strong> All rights reserved.
+    <strong>Copyright &copy; 2015 <a href="http://patricksamson.ca">Patrick Samson</a>.</strong> All rights reserved.
 </footer>

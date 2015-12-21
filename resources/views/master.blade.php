@@ -10,8 +10,8 @@
     <div class="content-wrapper">
         <section class="content-header">
             <h1>
-                Page Header
-                <small>Optional description</small>
+                @yield('page-header', 'Page Header')
+                <small>@yield('page-desc', '')</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
@@ -20,9 +20,7 @@
         </section>
 
         <section class="content">
-
-          <!-- Your Page Content Here -->
-
+            @yield('page-content', 'This page content')
         </section>
     </div>
 
