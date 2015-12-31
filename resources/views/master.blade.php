@@ -13,10 +13,6 @@
                 @yield('page-header', 'Page Header')
                 <small>@yield('page-desc', '')</small>
             </h1>
-            <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
-                <li class="active">Here</li>
-            </ol>
         </section>
 
         <section class="content">
@@ -37,7 +33,6 @@
 <script src="/adminLTE/dist/js/app.min.js"></script>
 
 @yield('extra-scripts')
-
 
 </body>
 </html>

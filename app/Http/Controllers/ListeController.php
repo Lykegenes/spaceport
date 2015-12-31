@@ -3,11 +3,19 @@
 namespace Spaceport\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Kris\LaravelFormBuilder\FormBuilder;
 use Spaceport\Http\Controllers\Controller;
 use Spaceport\Models\Liste;
 
 class ListeController extends Controller
 {
+    protected $formBuilder;
+
+    public function __construct(FormBuilder $formBuilder)
+    {
+        $this->formBuilder = $formBuilder;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +23,11 @@ class ListeController extends Controller
      */
     public function getIndex()
     {
-        //
+        $listes = Liste::all();
+
+        return view('liste.index', [
+            'listes' => $listes,
+        ]);
     }
 
     /**
@@ -25,7 +37,12 @@ class ListeController extends Controller
      */
     public function getCreate()
     {
-        return view('liste.create');
+        $form = $this->formBuilder->create('Spaceport\Forms\ListeForm', [
+            'method' => 'POST',
+            'url' => action('ListeController@postStore'),
+        ]);
+
+        return view('liste.show', compact('form'));
     }
 
     /**
@@ -36,7 +53,9 @@ class ListeController extends Controller
      */
     public function postStore(Request $request)
     {
-        //
+        $liste = Liste::create($request->all());
+
+        return redirect()->action('ListeController@getIndex');
     }
 
     /**
@@ -47,9 +66,13 @@ class ListeController extends Controller
      */
     public function getShow($id)
     {
-        $liste = Liste::findOrFail($id);
+        $form = $this->formBuilder->create('Spaceport\Forms\ListeForm', [
+            'model' => Liste::findOrFail($id),
+        ]);
 
-        return dd($liste);
+        $form->disableFields();
+
+        return view('liste.show', compact('form'));
     }
 
     /**
@@ -60,7 +83,11 @@ class ListeController extends Controller
      */
     public function getEdit($id)
     {
-        //
+        $form = $this->formBuilder->create('Spaceport\Forms\ListeForm', [
+            'model' => Liste::findOrFail($id),
+        ]);
+
+        return view('liste.show', compact('form'));
     }
 
     /**
@@ -72,7 +99,11 @@ class ListeController extends Controller
      */
     public function updateUpdate(Request $request, $id)
     {
-        //
+        $liste = Liste::findOrFail($id);
+
+        $liste->update($request->all());
+
+        return redirect()->action('ListeController@getIndex');
     }
 
     /**
@@ -81,8 +112,12 @@ class ListeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function deleteDelete($id)
     {
-        //
+        $liste = Liste::findOrFail($id);
+
+        $liste->delete();
+
+        return redirect()->action('ListeController@getIndex');
     }
 }

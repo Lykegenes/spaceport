@@ -1,43 +1,26 @@
 @extends('master')
 
-@section('page-header')
-    {{ 'Create a new List' }}
-@overwrite
+@section('page-header', 'Create a new List')
 
 @section('page-content')
 
-    @section('panel-title')
-        {{ 'List creation form' }}
-    @stop
+  @section('panel-title', 'List creation form')
 
-    <form role="form">
-        @section('panel-content')
-            <div class="form-group">
-                <label for="exampleInputEmail1">Email address</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
-            </div>
-            <div class="form-group">
-                <label for="exampleInputPassword1">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-            </div>
-            <div class="form-group">
-                <label for="exampleInputFile">File input</label>
-                <input type="file" id="exampleInputFile">
-                <p class="help-block">Example block-level help text here.</p>
-            </div>
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox"> Check me out
-                </label>
-            </div>
-        @overwrite
+  <form role="form" action="{{ action('ListeController@postStore') }}" method="post">
+    {!! csrf_field() !!}
 
-        @section('panel-footer')
-            <button type="submit" class="btn btn-primary">Create</button>
-        @stop
+    @section('panel-content')
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" class="form-control" name="name" placeholder="Enter list name">
+        </div>
+
+    @overwrite
+
+  @section('panel-footer')
+      <button type="submit" class="btn btn-primary">Create</button>
     </form>
-
-
+  @stop
 
 @include('panel')
 @stop

@@ -13,6 +13,8 @@ class Liste extends Model
      */
     protected $table = 'listes';
 
+    protected $guarded = ['id'];
+
     public function columns()
     {
         return $this->hasMany(Column);
