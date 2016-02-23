@@ -17,6 +17,11 @@ class Liste extends Model
 
     public function columns()
     {
-        return $this->hasMany(Column);
+        return $this->hasMany('column');
+    }
+
+    public function items()
+    {
+        return $this->belongsToMany('items');
     }
 }

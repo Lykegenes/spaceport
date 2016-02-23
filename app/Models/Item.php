@@ -15,11 +15,11 @@ class Item extends Model
 
     public function liste()
     {
-        return $this->hasOne(Liste);
+        return $this->hasOne('liste');
     }
 
     public function columns()
     {
-        return $this->hasManyThrough(Column, Liste);
+        return $this->hasManyThrough('column', 'liste');
     }
 }
