@@ -1,25 +1,35 @@
-@extends('master')
+@extends('layouts.app')
 
-@section('page-header', 'Your Lists')
+@section('htmlheader_title')
+	Liste
+@endsection
 
-@section('page-content')
+@section('contentheader_title')
+	Manage your lists
+@endsection
 
-    @section('panel-title')
-        <a href="{{ action('ListeController@getCreate') }}" class="btn btn-primary">Create a new list</a>
-    @overwrite
 
-    @section('panel-content')
-      <ul>
-        @forelse ($listes as $liste)
-          <li><a href="{{ action('ListeController@getShow', ['id' => $liste->id]) }}">{{ $liste->name }}</a></li>
-        @empty
-          <p>Aucune liste :(</p>
-        @endforelse
-      </ul>
-    @overwrite
+@section('main-content')
+	<div class="container spark-screen">
+		<div class="row">
+			<div class="col-md-10 col-md-offset-1">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						Listes
+						<a href="{{ action('ListeController@getCreate') }}" class="btn btn-xs btn-success pull-right">Create a new list</a>
+					</div>
 
-    @section('panel-footer')
-    @overwrite
-
-@include('panel')
-@stop
+					<div class="panel-body">
+						<ul>
+			        @forelse ($listes as $liste)
+			          <li><a href="{{ action('ListeController@getShow', ['id' => $liste->id]) }}">{{ $liste->name }}</a></li>
+			        @empty
+			          <p>Aucune liste :(</p>
+			        @endforelse
+			      </ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+@endsection

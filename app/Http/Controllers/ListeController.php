@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Kris\LaravelFormBuilder\FormBuilder;
 use Spaceport\Http\Controllers\Controller;
 use Spaceport\Models\Liste;
+use Spaceport\Models\Column;
 
 class ListeController extends Controller
 {
@@ -42,7 +43,7 @@ class ListeController extends Controller
             'url' => action('ListeController@postStore'),
         ]);
 
-        return view('liste.show', compact('form'));
+        return view('liste.create', compact('form'));
     }
 
     /**
@@ -66,13 +67,15 @@ class ListeController extends Controller
      */
     public function getShow($id)
     {
+        $columns = Column::all();
+
         $form = $this->formBuilder->create('Spaceport\Forms\ListeForm', [
             'model' => Liste::findOrFail($id),
         ]);
 
         $form->disableFields();
 
-        return view('liste.show', compact('form'));
+        return view('liste.show', compact('id', 'form', 'columns'));
     }
 
     /**
@@ -87,7 +90,7 @@ class ListeController extends Controller
             'model' => Liste::findOrFail($id),
         ]);
 
-        return view('liste.show', compact('form'));
+        return view('liste.edit', compact('id', 'form'));
     }
 
     /**
@@ -97,7 +100,7 @@ class ListeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function updateUpdate(Request $request, $id)
+    public function postUpdate(Request $request, $id)
     {
         $liste = Liste::findOrFail($id);
 

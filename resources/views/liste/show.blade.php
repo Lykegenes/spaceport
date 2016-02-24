@@ -1,20 +1,51 @@
-@extends('master')
+@extends('layouts.app')
 
-@section('page-header', 'Create a new List')
+@section('htmlheader_title')
+	Liste
+@endsection
 
-@section('page-content')
+@section('contentheader_title')
+	Manage your lists
+@endsection
 
-  @section('panel-title', 'List creation form')
 
-  {!! form_start($form) !!}
-  @section('panel-content')
-    {!! form_rest($form) !!}
-  @overwrite
+@section('main-content')
+	<div class="container spark-screen">
+		<div class="row">
+			<div class="col-md-10 col-md-offset-1">
+				<div class="panel panel-default">
+					<div class="panel-heading">Listes</div>
 
-  @section('panel-footer')
-    <button type="submit" class="btn btn-primary">Create</button>
-    {!! form_end($form) !!}
-  @stop
+					<div class="panel-body">
+						{!! form_rest($form) !!}
+					</div>
 
-@include('panel')
-@stop
+					<div class="panel-footer">
+						<a href="{{ action('ListeController@getEdit', ['id' => $id]) }}" class="btn btn-primary">Edit</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-10 col-md-offset-1">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						Colonnes
+						<a href="{{ action('ListeController@getCreate') }}" class="btn btn-xs btn-success pull-right">Create a new column</a>
+					</div>
+
+					<div class="panel-body">
+						<ul>
+			        @forelse ($columns as $column)
+			          <li><a href="{{ action('ListeController@getShow', ['id' => $column->id]) }}">{{ $column->name }}</a></li>
+			        @empty
+			          <p>Aucune colonne :(</p>
+			        @endforelse
+			      </ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+@endsection

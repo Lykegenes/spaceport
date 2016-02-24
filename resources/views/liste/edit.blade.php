@@ -16,7 +16,7 @@
 				<div class="panel panel-default">
 					<div class="panel-heading">Listes</div>
 
-					<form role="form" action="{{ action('ListeController@postStore') }}" method="post">
+					<form role="form" action="{{ action('ListeController@postUpdate', ['id' => $id]) }}" method="post">
 				    {!! csrf_field() !!}
 
 						<div class="panel-body">
@@ -24,7 +24,7 @@
 						</div>
 
 						<div class="panel-footer">
-							<button type="submit" class="btn btn-primary">Create</button>
+							<button type="submit" class="btn btn-primary">Edit</button>
 						</div>
 					</form>
 				</div>
