@@ -14,7 +14,7 @@ class CreateColumnsTable extends Migration
     {
         Schema::create('columns', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('listes_id');
+            $table->integer('liste_id');
             $table->string('name');
             $table->timestamps();
         });

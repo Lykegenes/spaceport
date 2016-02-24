@@ -4,7 +4,6 @@ namespace Spaceport\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Kris\LaravelFormBuilder\FormBuilder;
-use Spaceport\Http\Controllers\Controller;
 use Spaceport\Models\Liste;
 use Spaceport\Models\Column;
 
@@ -22,7 +21,7 @@ class ListeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function getIndex()
+    public function index()
     {
         $listes = Liste::all();
 
@@ -36,11 +35,11 @@ class ListeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function getCreate()
+    public function create()
     {
         $form = $this->formBuilder->create('Spaceport\Forms\ListeForm', [
             'method' => 'POST',
-            'url' => action('ListeController@postStore'),
+            'url' => action('ListeController@store'),
         ]);
 
         return view('liste.create', compact('form'));
@@ -52,11 +51,11 @@ class ListeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function postStore(Request $request)
+    public function store(Request $request)
     {
         $liste = Liste::create($request->all());
 
-        return redirect()->action('ListeController@getIndex');
+        return redirect()->action('ListeController@index');
     }
 
     /**
@@ -65,7 +64,7 @@ class ListeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function getShow($id)
+    public function show($id)
     {
         $columns = Column::all();
 
@@ -84,7 +83,7 @@ class ListeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function getEdit($id)
+    public function edit($id)
     {
         $form = $this->formBuilder->create('Spaceport\Forms\ListeForm', [
             'model' => Liste::findOrFail($id),
@@ -100,13 +99,13 @@ class ListeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function postUpdate(Request $request, $id)
+    public function update(Request $request, $id)
     {
         $liste = Liste::findOrFail($id);
 
         $liste->update($request->all());
 
-        return redirect()->action('ListeController@getIndex');
+        return redirect()->action('ListeController@index');
     }
 
     /**
@@ -115,12 +114,12 @@ class ListeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function deleteDelete($id)
+    public function delete($id)
     {
         $liste = Liste::findOrFail($id);
 
         $liste->delete();
 
-        return redirect()->action('ListeController@getIndex');
+        return redirect()->action('ListeController@index');
     }
 }

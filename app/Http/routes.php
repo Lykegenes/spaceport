@@ -1,19 +1,23 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the controller to call when that URI is requested.
-|
- */
+$router->group(['middleware' => ['web']], function ($router) {
 
-Route::get('/', function () {
-    //return view('welcome');
-    return view('home');
+    $router->get('/', function () {
+        //return view('welcome');
+        return view('home');
+    });
+
+    // List routes
+    $router->get('/lists', 'ListeController@index');
+    $router->get('/lists/{list}', 'ListeController@show');
+    $router->get('/lists/create', 'ListeController@create');
+    $router->post('/lists', 'ListeController@store');
+    $router->get('/lists/edit/{list}', 'ListeController@edit');
+    $router->put('/lists/edit/{list}', 'ListeController@update');
+    $router->delete('/lists/{list}', 'ListeController@delete');
+
+    // Column routes
+    $router->get('/lists/{list}/columns', 'ColumnController@index');
+    $router->get('/lists/{list}/columns/create', 'ColumnController@create');
+    $router->post('/lists/{list}/columns', 'ColumnController@store');
 });
-
-Route::controller('/list', 'ListeController');

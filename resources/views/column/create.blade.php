@@ -5,7 +5,7 @@
 @endsection
 
 @section('contentheader_title')
-	Manage your lists
+	Create a column
 @endsection
 
 
@@ -14,9 +14,9 @@
 		<div class="row">
 			<div class="col-md-10 col-md-offset-1">
 				<div class="panel panel-default">
-					<div class="panel-heading">Listes</div>
+					<div class="panel-heading">Column creation form</div>
 
-					<form role="form" action="{{ action('ListeController@store') }}" method="post">
+					<form role="form" action="{{ action('ColumnController@store', ['list' => $list]) }}" method="post">
 				    {!! csrf_field() !!}
 
 						<div class="panel-body">

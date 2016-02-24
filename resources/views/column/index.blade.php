@@ -5,7 +5,7 @@
 @endsection
 
 @section('contentheader_title')
-	Manage your lists
+	Manage the Columns in this List
 @endsection
 
 
@@ -15,16 +15,16 @@
 			<div class="col-md-10 col-md-offset-1">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						Listes
-						<a href="{{ action('ListeController@create') }}" class="btn btn-xs btn-success pull-right">Create a new list</a>
+						Columns
+						<a href="{{ action('ColumnController@create') }}" class="btn btn-xs btn-success pull-right">Create a new column</a>
 					</div>
 
 					<div class="panel-body">
 						<ul>
-			        @forelse ($listes as $liste)
-			          <li><a href="{{ action('ListeController@show', ['id' => $liste->id]) }}">{{ $liste->name }}</a></li>
+			        @forelse ($columns as $column)
+			          <li><a href="{{ action('ColumnController@show', ['id' => $column->id]) }}">{{ $column->name }}</a></li>
 			        @empty
-			          <p>Aucune liste :(</p>
+			          <p>Aucune colonne :(</p>
 			        @endforelse
 			      </ul>
 					</div>

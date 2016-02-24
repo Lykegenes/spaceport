@@ -16,7 +16,7 @@
 				<div class="panel panel-default">
 					<div class="panel-heading">Listes</div>
 
-					<form role="form" action="{{ action('ListeController@postUpdate', ['id' => $id]) }}" method="post">
+					<form role="form" action="{{ action('ListeController@update', ['id' => $id]) }}" method="post">
 				    {!! csrf_field() !!}
 
 						<div class="panel-body">

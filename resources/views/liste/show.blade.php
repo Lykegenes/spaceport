@@ -21,7 +21,7 @@
 					</div>
 
 					<div class="panel-footer">
-						<a href="{{ action('ListeController@getEdit', ['id' => $id]) }}" class="btn btn-primary">Edit</a>
+						<a href="{{ action('ListeController@edit', ['id' => $id]) }}" class="btn btn-primary">Edit</a>
 					</div>
 				</div>
 			</div>
@@ -32,13 +32,13 @@
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						Colonnes
-						<a href="{{ action('ListeController@getCreate') }}" class="btn btn-xs btn-success pull-right">Create a new column</a>
+						<a href="{{ action('ColumnController@create', ['list' => $id]) }}" class="btn btn-xs btn-success pull-right">Create a new column</a>
 					</div>
 
 					<div class="panel-body">
 						<ul>
 			        @forelse ($columns as $column)
-			          <li><a href="{{ action('ListeController@getShow', ['id' => $column->id]) }}">{{ $column->name }}</a></li>
+			          <li><a href="{{ action('ListeController@show', ['id' => $column->id]) }}">{{ $column->name }}</a></li>
 			        @empty
 			          <p>Aucune colonne :(</p>
 			        @endforelse

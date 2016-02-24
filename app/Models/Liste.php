@@ -17,11 +17,11 @@ class Liste extends Model
 
     public function columns()
     {
-        return $this->hasMany('column');
+        return $this->hasMany('Spaceport\Models\Column');
     }
 
     public function items()
     {
-        return $this->belongsToMany('items');
+        return $this->belongsToMany('Spaceport\Models\Item');
     }
 }
