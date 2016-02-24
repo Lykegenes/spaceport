@@ -4,15 +4,25 @@ namespace Spaceport\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Kris\LaravelFormBuilder\FormBuilder;
-use Spaceport\Models\Liste;
 use Spaceport\Models\Column;
+use Spaceport\Models\Liste;
+use Spaceport\Repositories\ListRepository;
 
 class ListeController extends Controller
 {
+    /**
+     * @var FormBuilder
+     */
     protected $formBuilder;
 
-    public function __construct(FormBuilder $formBuilder)
+    /**
+     * @var ListRepository
+     */
+    protected $lists;
+
+    public function __construct(ListRepository $lists, FormBuilder $formBuilder)
     {
+        $this->lists = $lists;
         $this->formBuilder = $formBuilder;
     }
 
@@ -53,7 +63,13 @@ class ListeController extends Controller
      */
     public function store(Request $request)
     {
-        $liste = Liste::create($request->all());
+        $this->validate($request, [
+            'name' => 'required|unique:listes|between:3,80',
+        ]);
+
+        $list = $this->listRepository->create(
+            ['name' => $request->name]
+        );
 
         return redirect()->action('ListeController@index');
     }
