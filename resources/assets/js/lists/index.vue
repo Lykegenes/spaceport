@@ -1,7 +1,7 @@
 <template>
     <div class="panel-heading">
         Listes {{ message }}
-        <a href="{{ action('ListController@create') }}" class="btn btn-xs btn-success pull-right">Create a new list</a>
+        <a href="#" class="btn btn-xs btn-success pull-right">Create a new list</a>
     </div>
 
     <div class="panel-body">

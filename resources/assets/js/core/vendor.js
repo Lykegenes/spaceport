@@ -12,6 +12,13 @@ Vue.use(require('vue-resource'));
 // Vue.http.headers.common['X-CSRF-TOKEN'] = Spark.csrfToken;
 
 /*
+ * Load Underscore.js, used for map / reduce on arrays.
+ */
+if (window._ === undefined) {
+    window._ = require('underscore');
+}
+
+/*
  * Load Moment.js, used for date formatting and presentation.
  */
 if (window.moment === undefined) {
