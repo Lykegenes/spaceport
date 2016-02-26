@@ -16,6 +16,7 @@ class Kernel extends HttpKernel
     protected $middleware = [
         \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
     ];
+
     /**
      * The application's route middleware groups.
      *
@@ -29,10 +30,12 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \Spaceport\Http\Middleware\VerifyCsrfToken::class,
         ],
+
         'api' => [
             'throttle:60,1',
         ],
     ];
+
     /**
      * The application's route middleware.
      *

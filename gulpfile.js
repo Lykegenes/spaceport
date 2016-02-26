@@ -12,5 +12,7 @@ var elixir = require('laravel-elixir');
  */
 
 elixir(function(mix) {
+    mix.browserify('core/vendor.js', 'public/js/vendor.js')
+    mix.browserify('spaceport.js');
     mix.sass('app.scss');
 });

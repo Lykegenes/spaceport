@@ -1,23 +1,44 @@
 <?php
 
-$router->group(['middleware' => ['web']], function ($router) {
+/*
+|--------------------------------------------------------------------------
+| Routes File
+|--------------------------------------------------------------------------
+|
+| Here is where you will register all of the routes in an application.
+| It's a breeze. Simply tell Laravel the URIs it should respond to
+| and give it the controller to call when that URI is requested.
+|
+*/
 
-    $router->get('/', function () {
-        //return view('welcome');
-        return view('home');
+Route::get('/', function () {
+    return view('home');
+});
+
+/*
+|--------------------------------------------------------------------------
+| Application Routes
+|--------------------------------------------------------------------------
+|
+| This route group applies the "web" middleware group to every route
+| it contains. The "web" middleware group is defined in your HTTP
+| kernel and includes session state, CSRF protection, and more.
+|
+*/
+
+Route::group(['middleware' => ['web']], function ($router) {
+
+    // Lists views
+    $router->get('/lists', 'ListController@index');
+    $router->get('/lists/create', 'ListController@create');
+
+});
+
+Route::group(['prefix' => 'api', 'middleware' => ['api']], function ($router) {
+
+    // Lists views
+    $router->get('/lists', function () {
+        return ['List', 'Some list', 'other list'];
     });
 
-    // List routes
-    $router->get('/lists', 'ListeController@index');
-    $router->get('/lists/{list}', 'ListeController@show');
-    $router->get('/lists/create', 'ListeController@create');
-    $router->post('/lists', 'ListeController@store');
-    $router->get('/lists/edit/{list}', 'ListeController@edit');
-    $router->put('/lists/edit/{list}', 'ListeController@update');
-    $router->delete('/lists/{list}', 'ListeController@delete');
-
-    // Column routes
-    $router->get('/lists/{list}/columns', 'ColumnController@index');
-    $router->get('/lists/{list}/columns/create', 'ColumnController@create');
-    $router->post('/lists/{list}/columns', 'ColumnController@store');
 });
