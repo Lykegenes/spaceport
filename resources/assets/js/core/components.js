@@ -2,4 +2,8 @@
 /**
  * Load all of the core Spaceport Vue components.
  */
-require('./../lists/create');
+import ListIndex from './../lists/index.vue'
+Vue.component('spaceport-list-index', ListIndex)
+
+import ListCreateForm from './../lists/create.vue'
+Vue.component('spaceport-list-create-form', ListCreateForm)
