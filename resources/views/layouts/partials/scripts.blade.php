@@ -1,6 +1,7 @@
 <!-- REQUIRED JS SCRIPTS -->
 
 <!-- Vendors, compiled using Gulp -->
+<script src="{{ asset('/js/jquery.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('/js/vendor.js') }}" type="text/javascript"></script>
 
 <!-- AdminLTE App -->

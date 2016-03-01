@@ -15,7 +15,7 @@
 </template>
 
 <script>
-export default {
+module.exports = {
     /*
      * Bootstrap the component. Load the initial data.
      */
