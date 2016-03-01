@@ -18,8 +18,6 @@ class ApiListController extends Controller
             'name' => 'required|min:123',
         ]);
 
-        return $request->all();
-
         $list = ListRepository::create($request->all());
 
         return $list->toJson();

@@ -1,7 +1,7 @@
 /**
  * Spark form error collection class.
  */
-window.SparkFormErrors = function () {
+window.SpaceportFormErrors = function () {
     this.errors = {};
 
     /**

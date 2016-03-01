@@ -1,15 +1,3 @@
-/**
- * Initialize the Spark form extension points.
- */
-/*Spark.forms = {
-    registration: {},
-    updateProfileBasics: {},
-    updateTeamOwnerBasics: {}
-};*/
-
-/**
- * Load the SparkForm helper class.
- */
 require('./instance');
 
 /**
@@ -17,12 +5,6 @@ require('./instance');
  */
 require('./errors');
 
-/**
- * Add additional form helpers to the Spark object.
- */
-$.extend(Spark, require('./http'));
+_.extend(Spaceport, require('./http'));
 
-/**
- * Define the Spark form input components.
- */
-require('./components');
+require('./components')

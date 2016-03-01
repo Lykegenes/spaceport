@@ -1,4 +1,3 @@
-window.Spark = {}
 window.Spaceport = {}
 
 /*
@@ -6,6 +5,9 @@ window.Spaceport = {}
  */
 require('./core/components');
 
+
+//new Vue(app).$mount('#spaceport-app')
 new Vue({
     el: '#spaceport-app',
 });
+
