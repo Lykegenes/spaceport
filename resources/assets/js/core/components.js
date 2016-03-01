@@ -1,4 +1,6 @@
 
+require('./../myforms/bootstrap.js')
+
 /**
  * Load all of the core Spaceport Vue components.
  */
@@ -8,4 +10,7 @@ Vue.component('spaceport-list-index', ListIndex)
 import ListCreateForm from './../lists/create.vue'
 Vue.component('spaceport-list-create-form', ListCreateForm)
 
-require('./../forms/bootstrap.js')
+import ListEditForm from './../lists/edit.vue'
+Vue.component('spaceport-list-edit-form', ListEditForm)
+
+//require('./../forms/bootstrap.js')

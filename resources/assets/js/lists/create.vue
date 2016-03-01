@@ -2,15 +2,15 @@
     <div class="panel-heading">Listes</div>
     <form role="form">
         <div class="panel-body">
-            <spark-text :display="'Name'"
+            <text-field :display="'Name'"
                         :form="forms.createList"
                         :name="'name'"
                         :input.sync="forms.createList.name">
-            </spark-text>
+            </text-field>
         </div>
         {{ forms.createList.name }} looks good!
         <div class="panel-footer">
-            <button v-on:click="createList" class="btn btn-primary">Edit</button>
+            <button v-on:click="createList" class="btn btn-primary">Save</button>
         </div>
     </form>
 </template>
@@ -27,8 +27,8 @@ export default {
     data: function () {
         return {
             forms: {
-                createList: new SparkForm({
-                    name: ''
+                createList: new MyForm({
+                    name: 'something'
                 })
             }
         }
@@ -40,13 +40,28 @@ export default {
          */
         createList: function () {
             var self = this;
-            alert('List created!')
+
             /*
-            Spark.put('/lists/create/', this.forms.createList)
+            Spaceport.post('/api/lists/create/', this.forms.createList)
                 .then(function () {
                     self.$dispatch('createList');
-                });
-                */
+                });*/
+
+            /*this.$http.get('/api/lists/').then(function (response) {
+                console.log(response)
+            })*/
+
+            /*this.$http.post('/api/lists/create/', JSON.stringify(this.forms.createList)).then(function (response) {
+                console.log(response)
+            })*/
+
+            Spaceport.post('/api/lists/create/', this.forms.createList).then(function (response) {
+                    console.log('success!')
+                    self.$log('forms.createList')
+                }, function (errors) {
+                    console.log('error!')
+                    self.$log('forms.createList')
+                })
         }
     },
 

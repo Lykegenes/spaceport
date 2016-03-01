@@ -1,11 +1,11 @@
 /**
  * Initialize the Spark form extension points.
  */
-Spark.forms = {
+/*Spark.forms = {
     registration: {},
     updateProfileBasics: {},
     updateTeamOwnerBasics: {}
-};
+};*/
 
 /**
  * Load the SparkForm helper class.

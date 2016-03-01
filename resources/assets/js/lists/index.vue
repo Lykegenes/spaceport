@@ -8,7 +8,7 @@
         <ul>
             <p v-if="lists.length == 0"> Aucune liste </p>
             <li v-for="list in lists">
-                <a href="#"> {{ list }} </a>
+                <a href="#"> {{ list.name }} </a>
             </li>
         </ul>
     </div>

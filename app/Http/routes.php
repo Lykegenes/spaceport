@@ -30,15 +30,25 @@ Route::group(['middleware' => ['web']], function ($router) {
 
     // Lists views
     $router->get('/lists', 'ListController@index');
-    $router->get('/lists/create', 'ListController@create');
 
 });
 
 Route::group(['prefix' => 'api', 'middleware' => ['api']], function ($router) {
 
     // Lists views
-    $router->get('/lists', function () {
-        return ['List', 'Some list', 'other list'];
+    $router->get('/lists', 'ApiListController@all');
+
+    /*$router->post('/lists/create', function () {
+        return ['List', 'Some list', 'other list', 'test'];
+    });*/
+    $router->post('/lists/create', 'ApiListController@create');
+
+    $router->get('/lists/{id}', function () {
+        return 'List Name';
+    });
+
+    $router->put('/lists/{id}', function () {
+        return 'Updated List Name';
     });
 
 });

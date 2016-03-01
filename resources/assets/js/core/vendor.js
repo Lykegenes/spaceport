@@ -21,9 +21,9 @@ if (window._ === undefined) {
 /*
  * Load Moment.js, used for date formatting and presentation.
  */
-if (window.moment === undefined) {
+/*if (window.moment === undefined) {
     window.moment = require('moment');
-}
+}*/
 
 /*
  * Load jQuery and Bootstrap jQuery, used for front-end interaction.

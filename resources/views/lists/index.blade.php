@@ -20,6 +20,10 @@
         <div class="panel panel-default">
           <spaceport-list-create-form></spaceport-list-create-form>
         </div>
+
+        <div class="panel panel-default">
+          <spaceport-list-edit-form></spaceport-list-edit-form>
+        </div>
       </div>
     </div>
   </div>

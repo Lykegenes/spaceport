@@ -1,4 +1,5 @@
 window.Spark = {}
+window.Spaceport = {}
 
 /*
  * Load the Spark components.
