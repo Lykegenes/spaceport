@@ -18,7 +18,7 @@ module.exports = {
 
     sendForm: function (method, uri, form) {
         return new Promise(function (resolve, reject) {
-            form.startProcessing
+            form.startProcessing();
 
             Vue.http[method](uri, JSON.stringify(form))
                 .then(function (response) {

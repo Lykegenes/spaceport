@@ -7,7 +7,53 @@ require('./core/components');
 
 
 //new Vue(app).$mount('#spaceport-app')
-new Vue({
+/*new Vue({
     el: '#spaceport-app',
-});
+});*/
 
+
+//-----------------------------------------------------
+// Define some components
+var Foo = Vue.extend({
+    template: '<p>This is foo!</p>'
+})
+
+var Bar = Vue.extend({
+    template: '<p>This is bar!</p>'
+})
+
+var App = Vue.extend({})
+
+var VueRouter = require('vue-router')
+var router = new VueRouter()
+
+router.map({
+    '/': {
+        component: require('./views/lists.vue'),
+    },
+    '/lists': {
+        component: require('./views/lists.vue'),
+        subRoutes: {
+            '/': {
+                name: 'list.index',
+                component: require('./lists/index.vue'),
+            },
+            '/create': {
+                name: 'list.create',
+                component: require('./lists/create.vue'),
+            },
+            '/edit/:listId': {
+                name: 'list.edit',
+                component: require('./lists/edit.vue'),
+            },
+        },
+    },
+    '/foo': {
+        component: require('./lists/index.vue')
+    },
+    '/bar': {
+        component: Bar
+    }
+})
+
+router.start(App, '#spaceport-app')

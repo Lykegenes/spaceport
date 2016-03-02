@@ -1,4 +1,5 @@
 <template>
+<div class="panel panel-default">
     <div class="panel-heading">Listes</div>
     <form role="form">
         <div class="panel-body">
@@ -13,6 +14,7 @@
             <button v-on:click="createList" class="btn btn-primary">Save</button>
         </div>
     </form>
+</div>
 </template>
 
 <script>
@@ -41,27 +43,10 @@ module.exports = {
         createList: function () {
             var self = this;
 
-            /*
             Spaceport.post('/api/lists/create/', this.forms.createList)
-                .then(function () {
-                    self.$dispatch('createList');
-                });*/
-
-            /*this.$http.get('/api/lists/').then(function (response) {
-                console.log(response)
-            })*/
-
-            /*this.$http.post('/api/lists/create/', JSON.stringify(this.forms.createList)).then(function (response) {
-                console.log(response)
-            })*/
-
-            Spaceport.post('/api/lists/create/', this.forms.createList).then(function (response) {
-                    console.log('success!')
-                    self.$log('forms.createList')
-                }, function (errors) {
-                    console.log('error!')
-                    self.$log('forms.createList')
-                })
+                .then(function (response) {
+                    self.$router.go({name: 'list.index'});
+                });
         }
     },
 

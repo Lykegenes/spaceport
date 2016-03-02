@@ -1,28 +1,35 @@
 <template>
+<div class="panel panel-default">
     <div class="panel-heading">Listes</div>
     <form role="form">
         <div class="panel-body">
-            <form-text :display="'Name'"
+            <text-field :display="'Name'"
                         :form="forms.editList"
                         :name="'name'"
                         :input.sync="forms.editList.name">
-            </form-text>
+            </text-field>
         </div>
         {{ forms.editList.name }} looks good! </br>
         {{ list }}
         <div class="panel-footer">
-            <button v-on:click="saveList" class="btn btn-primary">Save</button>
+            <button v-on:click="updateList" class="btn btn-primary">Save</button>
         </div>
     </form>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">Delete</div>
+    <div class="panel-body">
+        <button v-on:click="deleteList" class="btn btn-danger">Delete</button>
+    </div>
+</div>
 </template>
 
 <script>
 module.exports = {
-    /*
-     * Bootstrap the component. Load the initial data.
-     */
+
     ready: function () {
-        this.getList(1)
+        this.getList(this.$route.params.listId)
     },
 
     data: function () {
@@ -38,35 +45,37 @@ module.exports = {
 
     watch: {
         'list': function(list) {
-            this.forms.editList.name = list
+            this.forms.editList.name = list.name
         }
-    },
-
-    events: {
-        'updateList': function() {
-            alert('updated!')
-        },
     },
 
     methods: {
         getList: function (id) {
+            var self = this;
+
             this.$http.get('/api/lists/' + id)
                 .then(function (list) {
-                    this.list = list.data;
+                    self.list = list.data;
 
-                    this.$broadcast('listRetrieved', list);
+                    self.$broadcast('listRetrieved', list);
                 });
         },
 
-        /*
-         * Edit a given list.
-         */
-        saveList: function () {
+        updateList: function () {
             var self = this;
 
-            Spark.put('/api/lists/' + this.list.id, this.forms.editList)
+            Spaceport.put('/api/lists/' + this.list.id, this.forms.editList)
                 .then(function () {
-                    self.$dispatch('updateList');
+                    self.$router.go({name: 'list.index'});
+                });
+        },
+
+        deleteList: function () {
+            var self = this;
+
+            Spaceport.delete('/api/lists/' + this.list.id, this.forms.editList)
+                .then(function () {
+                    self.$router.go({name: 'list.index'});
                 });
         },
     },

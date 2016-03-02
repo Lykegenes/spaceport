@@ -1,17 +1,19 @@
 <template>
+<div class="panel panel-default">
     <div class="panel-heading">
         Listes {{ message }}
-        <a href="#" class="btn btn-xs btn-success pull-right">Create a new list</a>
+        <a v-link="{ name: 'list.create' }" class="btn btn-xs btn-success pull-right">Create a new list</a>
     </div>
 
     <div class="panel-body">
         <ul>
             <p v-if="lists.length == 0"> Aucune liste </p>
             <li v-for="list in lists">
-                <a href="#"> {{ list.name }} </a>
+                <a v-link="{ name: 'list.edit', params: { listId: list.id } }"> {{ list.name }} </a>
             </li>
         </ul>
     </div>
+</div>
 </template>
 
 <script>

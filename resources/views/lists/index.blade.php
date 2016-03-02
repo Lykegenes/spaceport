@@ -10,21 +10,5 @@
 
 
 @section('main-content')
-  <div class="container">
-    <div class="row">
-      <div class="col-md-10 col-md-offset-1">
-        <div class="panel panel-default">
-          <spaceport-list-index></spaceport-list-index>
-        </div>
-
-        <div class="panel panel-default">
-          <spaceport-list-create-form></spaceport-list-create-form>
-        </div>
-
-        <div class="panel panel-default">
-          <spaceport-list-edit-form></spaceport-list-edit-form>
-        </div>
-      </div>
-    </div>
-  </div>
+  <router-view></router-view>
 @endsection
