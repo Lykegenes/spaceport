@@ -29,7 +29,7 @@ module.exports = {
         return {
             list: null,
             forms: {
-                editList: new MyForm({
+                editList: new SpaceportForm({
                     name: ''
                 })
             }

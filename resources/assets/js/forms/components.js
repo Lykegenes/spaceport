@@ -1,2 +1,1 @@
-import TextField from './fields/text-field.vue'
-Vue.component('text-field', TextField)
+Vue.component('text-field', require('./fields/text-field.vue'))

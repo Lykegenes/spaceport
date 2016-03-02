@@ -1,7 +1,7 @@
 /**
  * SparkForm helper class. Used to set common properties on all forms.
  */
-window.MyForm = function (data) {
+window.SpaceportForm = function (data) {
     var form = this;
 
     _.extend(this, data)

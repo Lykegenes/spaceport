@@ -27,7 +27,7 @@ module.exports = {
     data: function () {
         return {
             forms: {
-                createList: new MyForm({
+                createList: new SpaceportForm({
                     name: 'something'
                 })
             }
