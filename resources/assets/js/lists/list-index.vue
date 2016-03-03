@@ -18,10 +18,11 @@
 
 <script>
 module.exports = {
-    /*
-     * Bootstrap the component. Load the initial data.
-     */
+
+    mixins: [SpaceportBreadcrumbs],
+
     ready: function () {
+        this.setBreadcrumb('test')
         this.getLists();
     },
 
@@ -39,8 +40,6 @@ module.exports = {
             this.$http.get('/api/lists/')
                 .then(function (lists) {
                     this.lists = lists.data;
-
-                    this.$broadcast('listsRetrieved', lists);
                 });
         },
     },
