@@ -13,28 +13,8 @@ require('./elixir-vendor');
  |
  */
 
-var paths = {
-    vue: './node_modules/vue/dist/vue.min.js',
-    vue_resource: './node_modules/vue-resource/dist/vue-resource.min.js',
-    vue_router: './node_modules/vue-router/dist/vue-router.min.js',
-    underscore: './node_modules/underscore/underscore-min.js',
-    bootstrap_js: './node_modules/bootstrap-sass/assets/javascripts/bootstrap.min.js',
-}
-
 elixir(function(mix) {
-    elixir.config.js.browserify.externals.push('vue', 'vue-resource', 'vue-router', 'underscore');
-
-/*
-    mix.combine([
-        paths.vue,
-        paths.vue_resource,
-        paths.vue_router,
-        paths.underscore,
-        paths.bootstrap_js,
-    ], 'public/js/vendor.js');
-*/
-
-    //mix.browserify('core/vendor.js', 'public/js/vendor.js');
+    elixir.config.js.browserify.externals.push('vue', 'vue-resource', 'vue-router','vue-hot-reload-api', 'underscore');
 
     mix.vendor('core/vendor.js', 'public/js/vendor.js');
 

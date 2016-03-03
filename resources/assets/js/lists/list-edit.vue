@@ -9,8 +9,6 @@
                         :input.sync="forms.editList.name">
             </text-field>
         </div>
-        {{ forms.editList.name }} looks good! </br>
-        {{ list }}
         <div class="panel-footer">
             <button v-on:click="updateList" class="btn btn-primary">Save</button>
         </div>

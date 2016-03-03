@@ -8,7 +8,10 @@ if (window.Vue === undefined) {
 }
 
 Vue.use(require('vue-resource'));
-//Vue.use(require('vue-router'));
+
+if (window.VueRouter === undefined) {
+    window.VueRouter = require('vue-router');
+}
 
 /*
  * Load Underscore.js, used for map / reduce on arrays.

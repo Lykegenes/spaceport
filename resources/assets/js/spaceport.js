@@ -3,31 +3,29 @@ window.Spaceport = {}
 Vue.config.debug = true
 
 /*
- * Load the Spark components.
+ * Load the Spaceport components.
  */
 require('./core/components');
 
 
-//new Vue(app).$mount('#spaceport-app')
-/*new Vue({
-    el: '#spaceport-app',
-});*/
+/**
+ * Load the Spaceport application
+ */
+var App = Vue.extend()
 
 
-//-----------------------------------------------------
-// Define some components
-var Foo = Vue.extend({
-    template: '<p>This is foo!</p>'
+/**
+ * Load the Spaceport routes
+ */
+var router = new VueRouter({
+    //hashbang: true,
+    //history: true,
+    linkActiveClass: "active",
+    //mode: 'html5',
+    //root: '/cms',
+    saveScrollPosition: true,
+    transitionOnLoad: true
 })
-
-var Bar = Vue.extend({
-    template: '<p>This is bar!</p>'
-})
-
-var App = Vue.extend({})
-
-var VueRouter = require('vue-router')
-var router = new VueRouter()
 
 router.map({
     '/': {
@@ -38,36 +36,33 @@ router.map({
         subRoutes: {
             '/': {
                 name: 'list.index',
-                component: require('./lists/index.vue'),
+                component: require('./lists/list-index.vue'),
             },
             '/create': {
                 name: 'list.create',
-                component: require('./lists/create.vue'),
+                component: require('./lists/list-create.vue'),
             },
             '/:listId/show': {
                 name: 'list.show',
-                component: require('./lists/show.vue'),
+                component: require('./lists/list-show.vue'),
             },
             '/:listId/edit': {
                 name: 'list.edit',
-                component: require('./lists/edit.vue'),
+                component: require('./lists/list-edit.vue'),
             },
             '/:listId/columns': {
                 name: 'list.columns',
-                component: require('./lists/edit.vue'),
+                component: require('./lists/list-edit.vue'),
             },
             '/:listId/columns/create': {
                 name: 'column.create',
-                component: require('./columns/create.vue'),
+                component: require('./columns/column-create.vue'),
             },
         },
     },
-    '/foo': {
-        component: require('./lists/index.vue')
-    },
-    '/bar': {
-        component: Bar
-    }
 })
 
+/**
+ * Start the Spaceport application
+ */
 router.start(App, '#spaceport-app')
