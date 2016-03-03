@@ -1,5 +1,7 @@
 window.Spaceport = {}
 
+Vue.config.debug = true
+
 /*
  * Load the Spark components.
  */
@@ -42,9 +44,21 @@ router.map({
                 name: 'list.create',
                 component: require('./lists/create.vue'),
             },
-            '/edit/:listId': {
+            '/:listId/show': {
+                name: 'list.show',
+                component: require('./lists/show.vue'),
+            },
+            '/:listId/edit': {
                 name: 'list.edit',
                 component: require('./lists/edit.vue'),
+            },
+            '/:listId/columns': {
+                name: 'list.columns',
+                component: require('./lists/edit.vue'),
+            },
+            '/:listId/columns/create': {
+                name: 'column.create',
+                component: require('./columns/create.vue'),
             },
         },
     },

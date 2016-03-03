@@ -1,7 +1,7 @@
 <template>
 <div class="panel panel-default">
     <div class="panel-heading">
-        Listes {{ message }}
+        Listes
         <a v-link="{ name: 'list.create' }" class="btn btn-xs btn-success pull-right">Create a new list</a>
     </div>
 
@@ -9,7 +9,7 @@
         <ul>
             <p v-if="lists.length == 0"> Aucune liste </p>
             <li v-for="list in lists">
-                <a v-link="{ name: 'list.edit', params: { listId: list.id } }"> {{ list.name }} </a>
+                <a v-link="{ name: 'list.show', params: { listId: list.id } }"> {{ list.name }} </a>
             </li>
         </ul>
     </div>
@@ -27,7 +27,6 @@ module.exports = {
 
     data: function () {
         return {
-            message: 'Hello Vue.js!',
             lists: [],
         }
     },
