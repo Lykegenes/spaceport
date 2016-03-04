@@ -3,10 +3,10 @@
     <div class="panel-heading">Column</div>
     <form role="form">
         <div class="panel-body">
-            <text-field :display="'Name'"
+            <text-field :display="'Title'"
                         :form="forms.createColumn"
-                        :name="'name'"
-                        :input.sync="forms.createColumn.name">
+                        :name="'title'"
+                        :input.sync="forms.createColumn.title">
             </text-field>
         </div>
         <div class="panel-footer">
@@ -27,9 +27,9 @@ module.exports = {
         return {
             forms: {
                 createColumn: new SpaceportForm({
-                    name: ''
-                })
-            }
+                    title: ''
+                }),
+            },
         }
     },
 
@@ -38,11 +38,11 @@ module.exports = {
         createColumn: function () {
             var self = this;
 
-            Spaceport.post('/api/columns/create/', this.forms.createColumn)
+            Spaceport.post('/api/lists/' + this.$route.params.listId + '/columns/create', this.forms.createColumn)
                 .then(function (response) {
-                    self.$router.go({name: 'list.index'});
+                    self.$router.go({name: 'list.show', 'params': { listId: self.$route.params.listId } });
                 });
-        }
+        },
     },
 
 };

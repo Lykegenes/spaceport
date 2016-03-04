@@ -3,10 +3,10 @@
     <div class="panel-heading">Listes</div>
     <form role="form">
         <div class="panel-body">
-            <text-field :display="'Name'"
+            <text-field :display="'Title'"
                         :form="forms.editList"
-                        :name="'name'"
-                        :input.sync="forms.editList.name">
+                        :name="'title'"
+                        :input.sync="forms.editList.title">
             </text-field>
         </div>
         <div class="panel-footer">
@@ -35,7 +35,7 @@ module.exports = {
             list: null,
             forms: {
                 editList: new SpaceportForm({
-                    name: ''
+                    title: ''
                 })
             }
         }
@@ -43,7 +43,7 @@ module.exports = {
 
     watch: {
         'list': function(list) {
-            this.forms.editList.name = list.name
+            this.forms.editList.title = list.title
         }
     },
 
@@ -52,10 +52,8 @@ module.exports = {
             var self = this;
 
             this.$http.get('/api/lists/' + id)
-                .then(function (list) {
-                    self.list = list.data;
-
-                    self.$broadcast('listRetrieved', list);
+                .then(function (response) {
+                    self.list = response.data;
                 });
         },
 

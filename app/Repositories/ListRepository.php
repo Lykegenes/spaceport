@@ -16,21 +16,21 @@ class ListRepository
         return Liste::all();
     }
 
-    public static function create($data = [])
+    public static function create(array $data)
     {
         $list = Liste::create([
-            'name' => $data['name'],
+            'title' => $data['title'],
         ]);
 
         return $list;
     }
 
-    public static function update($id, $data = [])
+    public static function update($id, array $data)
     {
         $list = self::getById($id);
 
         $list->fill([
-            'name' => $data['name'],
+            'title' => $data['title'],
         ])->save();
 
         return $list;
@@ -41,5 +41,23 @@ class ListRepository
         $list = self::getById($id);
 
         return $list->delete();
+    }
+
+    public static function addColumn($list, array $data)
+    {
+        $column = $list->columns()->create([
+            'title' => $data['title'],
+        ]);
+
+        return $column;
+    }
+
+    public static function updateColumn($column, array $data)
+    {
+        $column = $list->columns()->create([
+            'title' => $data['title'],
+        ]);
+
+        return $column;
     }
 }

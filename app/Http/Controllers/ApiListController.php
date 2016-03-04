@@ -12,15 +12,15 @@ class ApiListController extends Controller
         return ListRepository::all()->toJson();
     }
 
-    public function get($id)
+    public function get($listId)
     {
-        return ListRepository::getById($id)->toJson();
+        return ListRepository::getById($listId)->toJson();
     }
 
     public function create(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|min:5',
+            'title' => 'required|min:3|max:255',
         ]);
 
         $list = ListRepository::create($request->all());
@@ -28,21 +28,37 @@ class ApiListController extends Controller
         return $list->toJson();
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $listId)
     {
         $this->validate($request, [
-            'name' => 'required|min:5',
+            'title' => 'required|min:3|max:255',
         ]);
 
-        $list = ListRepository::update($id, $request->all());
+        $list = ListRepository::update($listId, $request->all());
 
         return $list->toJson();
     }
 
-    public function delete($id)
+    public function delete($listId)
     {
-        ListRepository::delete($id);
+        ListRepository::delete($listId);
 
         return;
+    }
+
+    public function getColumns($listId)
+    {
+        $list = ListRepository::getById($listId);
+
+        return $list->columns->toJson();
+    }
+
+    public function addColumn(Request $request, $listId)
+    {
+        $list = ListRepository::getById($listId);
+
+        $column = ListRepository::addColumn($list, $request->all());
+
+        return $column->toJson();
     }
 }

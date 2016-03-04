@@ -9,7 +9,7 @@
         <ul>
             <p v-if="lists.length == 0"> Aucune liste </p>
             <li v-for="list in lists">
-                <a v-link="{ name: 'list.show', params: { listId: list.id } }"> {{ list.name }} </a>
+                <a v-link="{ name: 'list.show', params: { listId: list.id } }"> {{ list.title }} </a>
             </li>
         </ul>
     </div>
@@ -22,7 +22,7 @@ module.exports = {
     mixins: [SpaceportBreadcrumbs],
 
     ready: function () {
-        this.setBreadcrumb('test')
+        this.setBreadcrumb('Lists')
         this.getLists();
     },
 

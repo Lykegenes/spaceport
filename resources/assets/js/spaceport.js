@@ -13,10 +13,12 @@ require('./core/components');
  */
 window.SpaceportApp = Vue.extend()
 
+
 /**
  * Load the Spaceport routes
  */
 require('./core/routes.js')
+
 
 /**
  * Start the Spaceport application

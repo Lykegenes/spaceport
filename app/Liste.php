@@ -8,5 +8,10 @@ class Liste extends Model
 {
     protected $table = 'lists';
 
-    protected $fillable = ['name'];
+    protected $fillable = ['title'];
+
+    public function columns()
+    {
+        return $this->hasMany(Column::class, 'list_id', 'id');
+    }
 }

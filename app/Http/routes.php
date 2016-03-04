@@ -38,8 +38,13 @@ Route::group(['prefix' => 'api', 'middleware' => ['api']], function ($router) {
     // Lists views
     $router->get('/lists', 'ApiListController@all');
     $router->post('/lists/create', 'ApiListController@create');
-    $router->get('/lists/{id}', 'ApiListController@get');
-    $router->put('/lists/{id}', 'ApiListController@update');
-    $router->delete('/lists/{id}', 'ApiListController@delete');
+    $router->get('/lists/{listId}', 'ApiListController@get');
+    $router->put('/lists/{listId}', 'ApiListController@update');
+    $router->delete('/lists/{listId}', 'ApiListController@delete');
 
+    $router->get('/lists/{listId}/columns', 'ApiListController@getColumns');
+    $router->post('/lists/{listId}/columns/create', 'ApiListController@addColumn');
+    $router->get('/columns/{columnId}', 'ApiColumnController@get');
+    $router->put('/columns/{columnId}', 'ApiColumnController@update');
+    $router->delete('/columns/{columnId}', 'ApiColumnController@delete');
 });

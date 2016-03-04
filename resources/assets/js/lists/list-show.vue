@@ -16,7 +16,7 @@
             <ul>
                 <p v-if="columns.length == 0"> Aucune colonne </p>
                 <li v-for="column in columns">
-                    <a v-link="{ name: 'column.edit', params: { columnId: column.id } }"> {{ column.name }} </a>
+                    <a v-link="{ name: 'column.edit', params: { listId: $route.params.listId, columnId: column.id } }"> {{ column.title }} </a>
                 </li>
             </ul>
         </div>
@@ -27,13 +27,22 @@
 module.exports = {
 
     ready: function () {
-        //this.getColumns();
+        this.getColumns();
     },
 
     data: function () {
         return {
             columns: [],
         }
+    },
+
+    methods: {
+        getColumns: function () {
+            this.$http.get('/api/lists/' + this.$route.params.listId + '/columns')
+                .then(function (columns) {
+                    this.columns = columns.data;
+                });
+        },
     },
 }
 </script>

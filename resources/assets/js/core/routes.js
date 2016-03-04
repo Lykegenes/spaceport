@@ -39,6 +39,10 @@ SpaceportRouter.map({
                 name: 'column.create',
                 component: require('./../columns/column-create.vue'),
             },
+            '/:listId/columns/:columnId': {
+                name: 'column.edit',
+                component: require('./../columns/column-edit.vue'),
+            },
         },
     },
 });

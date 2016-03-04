@@ -3,10 +3,10 @@
     <div class="panel-heading">Listes</div>
     <form role="form">
         <div class="panel-body">
-            <text-field :display="'Name'"
+            <text-field :display="'Title'"
                         :form="forms.createList"
-                        :name="'name'"
-                        :input.sync="forms.createList.name">
+                        :name="'title'"
+                        :input.sync="forms.createList.title">
             </text-field>
         </div>
         <div class="panel-footer">
@@ -29,7 +29,7 @@ module.exports = {
         return {
             forms: {
                 createList: new SpaceportForm({
-                    name: ''
+                    title: ''
                 })
             }
         }
