@@ -2,7 +2,11 @@
     <div class="form-group" :class="{'has-error': form.errors.has(name)}">
         <label class="col-sm-2 control-label">{{ display }}</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" v-model="input">
+            <select class="form-control" v-model="input">
+                <option v-for="item in items" :value="item.value">
+                    {{ item.text }}
+                </option>
+            </select>
 
             <span class="help-block" v-show="form.errors.has(name)">
                 <strong>{{ form.errors.get(name) }}</strong>
@@ -14,7 +18,7 @@
 <script>
     module.exports = {
 
-        props: ['display', 'form', 'name', 'input'],
+        props: ['display', 'form', 'name', 'items', 'input'],
 
     }
 </script>
