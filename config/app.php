@@ -155,6 +155,8 @@ return [
         Spaceport\Providers\AuthServiceProvider::class,
         Spaceport\Providers\EventServiceProvider::class,
         Spaceport\Providers\RouteServiceProvider::class,
+        Spaceport\Providers\ListeServiceProvider::class,
+        Spaceport\Providers\ColumnServiceProvider::class,
 
     ],
 

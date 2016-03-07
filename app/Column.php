@@ -10,8 +10,18 @@ class Column extends Model
 
     protected $fillable = ['title'];
 
-    public function column()
+    /**
+     * Get the parent Liste model.
+     *
+     * @return Spaceport\Liste The parent Liste model.
+     */
+    public function liste()
     {
         return $this->belongsTo(Liste::class, 'list_id', 'id');
+    }
+
+    public function getSqlColumnName()
+    {
+        return $this->title;
     }
 }
