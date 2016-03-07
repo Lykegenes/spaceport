@@ -29,12 +29,12 @@
 module.exports = {
 
     ready: function () {
-        //
+        this.getColumnTypes();
     },
 
     data: function () {
         return {
-            columnTypes: [{value:'first', text:'first'}, {value:'second', text:'second'}],
+            columnTypes: [],
             forms: {
                 createColumn: new SpaceportForm({
                     title: '',
@@ -52,6 +52,16 @@ module.exports = {
             Spaceport.post('/api/lists/' + this.$route.params.listId + '/columns/create', this.forms.createColumn)
                 .then(function (response) {
                     self.$router.go({name: 'list.show', 'params': { listId: self.$route.params.listId } });
+                });
+        },
+
+        getColumnTypes: function () {
+            var self = this;
+
+            this.$http.get('/api/columns/types/')
+                .then(function (response) {
+                    self.columnTypes = response.data;
+                    self.$log()
                 });
         },
     },

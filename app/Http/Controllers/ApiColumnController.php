@@ -12,6 +12,14 @@ class ApiColumnController extends Controller
         return ColumnRepository::getById($id);
     }
 
+    public function getColumnTypes()
+    {
+        return [
+            ['text' => 'first', 'value' => 'first'],
+            ['text' => 'second', 'value' => 'second'],
+        ];
+    }
+
     public function update(Request $request, $id)
     {
         $this->validate($request, [
