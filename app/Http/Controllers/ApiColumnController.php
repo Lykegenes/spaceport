@@ -3,6 +3,7 @@
 namespace Spaceport\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Spaceport\ColumnTypes\ColumnTypesConstants;
 use Spaceport\Repositories\ColumnRepository;
 
 class ApiColumnController extends Controller
@@ -15,8 +16,7 @@ class ApiColumnController extends Controller
     public function getColumnTypes()
     {
         return [
-            ['text' => 'first', 'value' => 'first'],
-            ['text' => 'second', 'value' => 'second'],
+            ['text' => 'Text Field', 'value' => ColumnTypesConstants::COL_TEXT_FIELD],
         ];
     }
 

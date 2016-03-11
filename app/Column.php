@@ -8,7 +8,7 @@ class Column extends Model
 {
     protected $table = 'columns';
 
-    protected $fillable = ['title'];
+    protected $fillable = ['title', 'type'];
 
     /**
      * Get the parent Liste model.

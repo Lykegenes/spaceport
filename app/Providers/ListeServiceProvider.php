@@ -37,11 +37,13 @@ class ListeServiceProvider extends ServiceProvider
     protected function createListeTable(Liste $liste)
     {
         $tableName = $liste->getSqlTableName();
+
         // Check if the table already exists
         if (Schema::hasTable($tableName)) {
             return false;
         }
 
+        // Create the table with the default columns
         Schema::create($tableName, function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();

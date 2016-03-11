@@ -84,6 +84,7 @@ class ListRepository
     {
         $column = $list->columns()->create([
             'title' => $data['title'],
+            'type' => $data['type'],
         ]);
 
         return $column;

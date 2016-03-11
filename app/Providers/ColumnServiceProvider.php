@@ -3,9 +3,8 @@
 namespace Spaceport\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Schema;
 use Spaceport\Column;
-use Spaceport\Liste;
+use Spaceport\ColumnTypes\ColumnTypesFactory;
 
 class ColumnServiceProvider extends ServiceProvider
 {
@@ -21,7 +20,7 @@ class ColumnServiceProvider extends ServiceProvider
         });
 
         Column::deleting(function ($column) {
-            $this->dropListeColumn()($column);
+            $this->dropListeColumn($column);
         });
     }
 
@@ -36,32 +35,21 @@ class ColumnServiceProvider extends ServiceProvider
 
     protected function createListeColumn(Column $column)
     {
-        $tableName = $column->liste->getSqlTableName();
-        $columnName = $column->getSqlColumnName();
+        $abstractColumnType = ColumnTypesFactory::make($column->type);
 
-        // Check if the column already exists
-        if (Schema::hasColumn($tableName, $columnName)) {
-            return false;
-        }
-
-        Schema::table($tableName, function ($table) use ($columnName) {
-            $table->string($columnName)->nullable();
-        });
+        $abstractColumnType->create($column);
 
         // The column should now exist.
-        return Schema::hasColumn($tableName, $columnName);
+        return $abstractColumnType->exists($column);
     }
 
-    protected function dropListeColumn(Column $liste)
+    protected function dropListeColumn(Column $column)
     {
-        $tableName = $column->liste->getSqlTableName();
-        $columnName = $column->getSqlColumnName();
+        $abstractColumnType = ColumnTypesFactory::make($column->type);
 
-        Schema::table($tableName, function ($table) use ($columnName) {
-            $table->dropColumn($columnName);
-        });
+        $abstractColumnType->drop($column);
 
         // The column shouldn't exist anymore.
-        return ! Schema::hasColumn($tableName, $columnName);
+        return ! $abstractColumnType->exists($column);
     }
 }

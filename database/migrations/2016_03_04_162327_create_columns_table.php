@@ -14,7 +14,10 @@ class CreateColumnsTable extends Migration
     {
         Schema::create('columns', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('list_id');
+            $table->integer('type');
             $table->text('title');
+            $table->boolean('is_required');
             $table->timestamps();
         });
     }
