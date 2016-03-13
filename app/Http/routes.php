@@ -29,11 +29,14 @@ Route::get('/', function () {
 Route::group(['middleware' => ['web']], function ($router) {
 
     // Lists views
-    $router->get('/lists', 'ListController@index');
+    $router->get('/settings', 'SettingsController@index');
 
 });
 
 Route::group(['prefix' => 'api', 'middleware' => ['api']], function ($router) {
+
+    // User endpoints
+    $router->get('/users', 'ApiUserController@all');
 
     // Lists views
     $router->get('/lists', 'ApiListController@all');
