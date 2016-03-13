@@ -20,6 +20,7 @@
         </div>
         <div class="box-footer">
             <button v-on:click="createColumn" class="btn btn-primary">Save</button>
+            <a class="btn btn-danger" v-link="{ name: 'list.show', params: { listId: $route.params.listId } }">Cancel</a>
         </div>
     </form>
 </div>

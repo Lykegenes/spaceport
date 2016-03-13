@@ -11,6 +11,7 @@
         </div>
         <div class="panel-footer">
             <button v-on:click="updateList" class="btn btn-primary">Save</button>
+            <a class="btn btn-danger" v-link="{ name: 'list.show', params: { listId: $route.params.listId } }">Cancel</a>
         </div>
     </form>
 </div>
