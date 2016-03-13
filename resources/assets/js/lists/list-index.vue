@@ -19,10 +19,7 @@
 <script>
 module.exports = {
 
-    mixins: [SpaceportBreadcrumbs],
-
     ready: function () {
-        this.setBreadcrumb('Lists')
         this.getLists();
     },
 
