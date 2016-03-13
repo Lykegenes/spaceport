@@ -27,6 +27,10 @@ class CreateListsTable extends Migration
      */
     public function down()
     {
+        foreach (\Spaceport\Liste::all() as $liste) {
+            Schema::dropIfExists($liste->getSqlTableName());
+        }
+
         Schema::drop('lists');
     }
 }
