@@ -55,6 +55,11 @@ class ApiListController extends Controller
     {
         $list = ListRepository::getById($listId);
 
+        $this->validate($request, [
+            'title' => 'required|min:3|max:255',
+            'type' => 'required',
+        ]);
+
         $column = ListRepository::addColumn($list, $request->all());
 
         return $column->toJson();

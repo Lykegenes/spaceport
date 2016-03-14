@@ -83,7 +83,7 @@ abstract class AbstractColumn
         }
 
         $self = $this;
-        Schema::table($column->liste->getSqlTableName, function ($table) use ($self, $column) {
+        Schema::table($column->liste->getSqlTableName(), function ($table) use ($self, $column) {
             $self->dropWithBlueprint($table, $column);
         });
 
@@ -97,6 +97,6 @@ abstract class AbstractColumn
      */
     public function dropWithBlueprint(Blueprint $table, Column $column)
     {
-        $table->dropColumn($column->getSqlColumnName);
+        $table->dropColumn($column->getSqlColumnName());
     }
 }

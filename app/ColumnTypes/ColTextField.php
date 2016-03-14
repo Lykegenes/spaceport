@@ -14,6 +14,6 @@ class ColTextField extends AbstractColumn
 
     public function validate(Column $column, $input)
     {
-        parent::validate($column, $input);
+        return parent::validate($column, $input);
     }
 }
