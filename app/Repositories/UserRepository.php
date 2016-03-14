@@ -9,8 +9,9 @@ class UserRepository
     /**
      * Get a single User by it's Id.
      *
-     * @param  int $id The User Id
-     * @return Spaceport\User     The User instance
+     * @param int $id The User Id
+     *
+     * @return Spaceport\User The User instance
      */
     public static function getById($id)
     {
@@ -30,8 +31,9 @@ class UserRepository
     /**
      * Create a new User instance with the given attributes.
      *
-     * @param  array $data The attributes to update
-     * @return Spaceport\User     The new User instance
+     * @param array $data The attributes to update
+     *
+     * @return Spaceport\User The new User instance
      */
     public static function create(array $data)
     {
@@ -45,9 +47,10 @@ class UserRepository
     /**
      * Update the User matching the given Id.
      *
-     * @param  int $id The User Id
-     * @param  array $data The attributes to update
-     * @return Spaceport\User     The User instance
+     * @param int   $id   The User Id
+     * @param array $data The attributes to update
+     *
+     * @return Spaceport\User The User instance
      */
     public static function update($id, array $data)
     {
@@ -63,7 +66,7 @@ class UserRepository
     /**
      * Delete the User matching the given Id.
      *
-     * @param  int $id The User Id
+     * @param int $id The User Id
      */
     public static function delete($id)
     {

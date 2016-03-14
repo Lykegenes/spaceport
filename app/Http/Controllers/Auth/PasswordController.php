@@ -2,8 +2,8 @@
 
 namespace Spaceport\Http\Controllers\Auth;
 
-use Spaceport\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
+use Spaceport\Http\Controllers\Controller;
 
 class PasswordController extends Controller
 {

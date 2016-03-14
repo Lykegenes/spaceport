@@ -58,6 +58,6 @@ class ListeServiceProvider extends ServiceProvider
         Schema::dropIfExists($tableName);
 
         // The table shouldn't exist anymore.
-        return ! Schema::hasTable($tableName);
+        return !Schema::hasTable($tableName);
     }
 }

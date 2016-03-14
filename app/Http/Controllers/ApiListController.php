@@ -42,8 +42,6 @@ class ApiListController extends Controller
     public function delete($listId)
     {
         ListRepository::delete($listId);
-
-        return;
     }
 
     public function getColumns($listId)
