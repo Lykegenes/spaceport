@@ -16,8 +16,8 @@ require('./elixir-vendor');
 elixir(function(mix) {
     elixir.config.js.browserify.externals.push('vue', 'vue-resource', 'vue-router','vue-hot-reload-api', 'underscore');
 
-    mix.vendor('core/vendor.js', 'public/js/vendor.js');
+    mix.vendor('core/vendor.js', 'public/dist/js/vendor.js');
 
-    mix.browserify('spaceport.js', 'public/js/spaceport.js');
+    mix.browserify('spaceport.js', 'public/dist/js/spaceport.js');
     mix.sass('app.scss');
 });
