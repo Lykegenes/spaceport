@@ -19,5 +19,5 @@ elixir(function(mix) {
     mix.vendor('core/vendor.js', 'public/dist/js/vendor.js');
 
     mix.browserify('spaceport.js', 'public/dist/js/spaceport.js');
-    mix.sass('app.scss');
+    mix.sass('app.scss', 'public/dist/css/app.css');
 });
