@@ -11,6 +11,7 @@
         </div>
         <div class="panel-footer">
             <button v-on:click="createList" class="btn btn-primary">Save</button>
+            <a class="btn btn-danger" v-link="{ name: 'list.index' }">Cancel</a>
         </div>
     </form>
 </div>
@@ -18,9 +19,7 @@
 
 <script>
 module.exports = {
-    /*
-     * Bootstrap the component. Load the initial data.
-     */
+
     ready: function () {
         //
     },

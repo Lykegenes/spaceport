@@ -34,7 +34,5 @@ class ApiColumnController extends Controller
     public function delete($id)
     {
         ColumnRepository::delete($id);
-
-        return;
     }
 }

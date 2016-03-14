@@ -45,4 +45,17 @@ SpaceportRouter.map({
             },
         },
     },
+    'users' : {
+        component: require('./../views/users.vue'),
+        subRoutes: {
+            '/': {
+                name: 'users.index',
+                component: require('./../users/user-index.vue'),
+            },
+            '/invite': {
+                name: 'users.invite',
+                component: require('./../users/user-invite.vue'),
+            },
+        },
+    },
 });

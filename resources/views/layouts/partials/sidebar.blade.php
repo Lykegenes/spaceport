@@ -33,8 +33,8 @@
         <ul class="sidebar-menu">
             <li class="header">HEADER</li>
             <!-- Optionally, you can add icons to the links -->
-            <li v-link-active><a v-link="{ name: 'list.index' }"><i class='fa fa-link'></i> <span>List</span></a></li>
-            <li><a href="#"><i class='fa fa-link'></i> <span>Another Link</span></a></li>
+            <li v-link-active><a v-link="{ name: 'list.index' }"><i class='fa fa-link'></i> <span>Lists</span></a></li>
+            <li v-link-active><a v-link="{ name: 'users.index' }"><i class='fa fa-link'></i> <span>Users</span></a></li>
             <li class="treeview">
                 <a href="#"><i class='fa fa-link'></i> <span>Multilevel</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
