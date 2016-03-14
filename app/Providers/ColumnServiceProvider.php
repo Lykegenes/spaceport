@@ -62,6 +62,6 @@ class ColumnServiceProvider extends ServiceProvider
         });
 
         // The column shouldn't exist anymore.
-        return ! Schema::hasColumn($tableName, $columnName);
+        return !Schema::hasColumn($tableName, $columnName);
     }
 }

@@ -42,7 +42,5 @@ class ApiUserController extends Controller
     public function delete($userId)
     {
         UserRepository::delete($userId);
-
-        return;
     }
 }

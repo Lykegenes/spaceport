@@ -9,8 +9,9 @@ class ListRepository
     /**
      * Get a single Liste by it's Id.
      *
-     * @param  int $id The Liste Id
-     * @return Spaceport\Liste     The Liste instance
+     * @param int $id The Liste Id
+     *
+     * @return Spaceport\Liste The Liste instance
      */
     public static function getById($id)
     {
@@ -30,8 +31,9 @@ class ListRepository
     /**
      * Create a new Liste instance with the given attributes.
      *
-     * @param  array $data The attributes to update
-     * @return Spaceport\Liste     The new Liste instance
+     * @param array $data The attributes to update
+     *
+     * @return Spaceport\Liste The new Liste instance
      */
     public static function create(array $data)
     {
@@ -45,9 +47,10 @@ class ListRepository
     /**
      * Update the Liste matching the given Id.
      *
-     * @param  int $id The Liste Id
-     * @param  array $data The attributes to update
-     * @return Spaceport\Liste     The Liste instance
+     * @param int   $id   The Liste Id
+     * @param array $data The attributes to update
+     *
+     * @return Spaceport\Liste The Liste instance
      */
     public static function update($id, array $data)
     {
@@ -63,7 +66,7 @@ class ListRepository
     /**
      * Delete the Liste matching the given Id.
      *
-     * @param  int $id The Liste Id
+     * @param int $id The Liste Id
      */
     public static function delete($id)
     {
@@ -77,7 +80,8 @@ class ListRepository
      * Create a new Column in the Given Liste instance.
      *
      * @param Spaceport\Liste $list The Liste instance
-     * @param array $data The attributes to add to the new column
+     * @param array           $data The attributes to add to the new column
+     *
      * @return Spaceport\Column The new Column instance
      */
     public static function addColumn(Liste $list, array $data)
