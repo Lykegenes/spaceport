@@ -11,7 +11,15 @@ require('./core/components');
 /**
  * Load the Spaceport application
  */
-window.SpaceportApp = Vue.extend()
+window.SpaceportApp = Vue.extend({
+
+    data: function () {
+        return {
+            SpaceportHeader: SpaceportHeaderData,
+        }
+    },
+
+})
 
 
 /**

@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('htmlheader_title')
-  Liste
+  Settings
 @endsection
 
 @section('contentheader_title')
-  Manage your lists
+  @{{ SpaceportHeader.titles | last }}
 @endsection
 
 

@@ -1,3 +1,6 @@
+/**
+ * Define the SpaceportForm class.
+ */
 require('./instance');
 
 /**
@@ -5,6 +8,12 @@ require('./instance');
  */
 require('./errors');
 
+/**
+ * Require Http module
+ */
 _.extend(Spaceport, require('./http'));
 
+/**
+ * Load Spaceport Form components
+ */
 require('./components')

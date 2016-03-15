@@ -36,6 +36,13 @@
             <li v-link-active><a v-link="{ name: 'list.index' }"><i class='fa fa-link'></i> <span>Lists</span></a></li>
             <li v-link-active><a v-link="{ name: 'users.index' }"><i class='fa fa-link'></i> <span>Users</span></a></li>
             <li class="treeview">
+              <a v-link="{ name: 'settings' }"><i class='fa fa-link'></i> <span>Settings</span> <i class="fa fa-angle-left pull-right"></i></a>
+              <ul class="treeview-menu">
+                <li v-link-active><a v-link="{ name: 'list.index' }"><i class='fa fa-link'></i> <span>Lists</span></a></li>
+                <li v-link-active><a v-link="{ name: 'users.index' }"><i class='fa fa-link'></i> <span>Users</span></a></li>
+              </ul>
+            </li>
+            <li class="treeview">
                 <a href="#"><i class='fa fa-link'></i> <span>Multilevel</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
                     <li><a href="#">Link in level 2</a></li>

@@ -14,8 +14,12 @@
 
 <script>
 module.exports = {
+
+    mixins: [SpaceportHeaderMixin],
+
     ready: function () {
-        //
+        this.setBreadcrumb('Users')
+        this.setHeaderTitle('Manage your Users')
     },
 }
 </script>

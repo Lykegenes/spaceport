@@ -1,6 +1,6 @@
 <template>
 <div class="panel panel-default">
-    <div class="panel-heading">Listes</div>
+    <div class="panel-heading">Create a List</div>
     <form role="form">
         <div class="panel-body">
             <text-field :display="'Title'"

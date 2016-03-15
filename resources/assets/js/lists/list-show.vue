@@ -16,7 +16,7 @@
             <ul>
                 <p v-if="columns.length == 0"> Aucune colonne </p>
                 <li v-for="column in columns">
-                    <a v-link="{ name: 'column.edit', params: { listId: $route.params.listId, columnId: column.id } }"> {{ column.title }} </a>
+                    <a v-link="{ name: 'column.edit', params: { listId: $route.params.listId, columnId: column.id } }"> {{ column.title }} - {{ column.type }} </a>
                 </li>
             </ul>
         </div>

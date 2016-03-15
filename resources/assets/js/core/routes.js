@@ -12,49 +12,55 @@ SpaceportRouter.map({
     '/': {
         component: require('./../views/lists.vue'),
     },
-    '/lists': {
-        component: require('./../views/lists.vue'),
+    '/settings': {
+        name: 'settings',
+        component: require('./../views/settings.vue'),
         subRoutes: {
-            '/': {
-                name: 'list.index',
-                component: require('./../lists/list-index.vue'),
+            '/lists': {
+                component: require('./../views/lists.vue'),
+                subRoutes: {
+                    '/': {
+                        name: 'list.index',
+                        component: require('./../lists/list-index.vue'),
+                    },
+                    '/create': {
+                        name: 'list.create',
+                        component: require('./../lists/list-create.vue'),
+                    },
+                    '/:listId/show': {
+                        name: 'list.show',
+                        component: require('./../lists/list-show.vue'),
+                    },
+                    '/:listId/edit': {
+                        name: 'list.edit',
+                        component: require('./../lists/list-edit.vue'),
+                    },
+                    '/:listId/columns': {
+                        name: 'list.columns',
+                        component: require('./../lists/list-edit.vue'),
+                    },
+                    '/:listId/columns/create': {
+                        name: 'column.create',
+                        component: require('./../columns/column-create.vue'),
+                    },
+                    '/:listId/columns/:columnId': {
+                        name: 'column.edit',
+                        component: require('./../columns/column-edit.vue'),
+                    },
+                },
             },
-            '/create': {
-                name: 'list.create',
-                component: require('./../lists/list-create.vue'),
-            },
-            '/:listId/show': {
-                name: 'list.show',
-                component: require('./../lists/list-show.vue'),
-            },
-            '/:listId/edit': {
-                name: 'list.edit',
-                component: require('./../lists/list-edit.vue'),
-            },
-            '/:listId/columns': {
-                name: 'list.columns',
-                component: require('./../lists/list-edit.vue'),
-            },
-            '/:listId/columns/create': {
-                name: 'column.create',
-                component: require('./../columns/column-create.vue'),
-            },
-            '/:listId/columns/:columnId': {
-                name: 'column.edit',
-                component: require('./../columns/column-edit.vue'),
-            },
-        },
-    },
-    'users' : {
-        component: require('./../views/users.vue'),
-        subRoutes: {
-            '/': {
-                name: 'users.index',
-                component: require('./../users/user-index.vue'),
-            },
-            '/invite': {
-                name: 'users.invite',
-                component: require('./../users/user-invite.vue'),
+            'users' : {
+                component: require('./../views/users.vue'),
+                subRoutes: {
+                    '/': {
+                        name: 'users.index',
+                        component: require('./../users/user-index.vue'),
+                    },
+                    '/invite': {
+                        name: 'users.invite',
+                        component: require('./../users/user-invite.vue'),
+                    },
+                },
             },
         },
     },

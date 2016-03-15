@@ -15,8 +15,11 @@
 <script>
 module.exports = {
 
+    mixins: [SpaceportHeaderMixin],
+
     ready: function () {
-        //
+        this.setBreadcrumb('Lists')
+        this.setHeaderTitle('Manage your Lists')
     },
 }
 </script>
