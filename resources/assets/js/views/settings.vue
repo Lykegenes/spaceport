@@ -5,7 +5,7 @@
 <script>
 module.exports = {
 
-    mixins: [SpaceportHeaderMixin],
+    mixins: [Spaceport.HeaderMixin],
 
     ready: function () {
         this.setBreadcrumb('Settings')

@@ -15,7 +15,7 @@ window.SpaceportApp = Vue.extend({
 
     data: function () {
         return {
-            SpaceportHeader: SpaceportHeaderData,
+            SpaceportHeader: Spaceport.HeaderData,
         }
     },
 

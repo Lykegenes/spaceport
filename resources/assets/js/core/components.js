@@ -1,5 +1,5 @@
 // Define SpaceportHeaderMixin
-require('./breadcrumbs.js')
+require('./header-mixin.js')
 
 // Load Vue custom filters
 require('./filters.js')
