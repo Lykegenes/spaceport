@@ -1,13 +1,20 @@
 <template>
 <div class="panel panel-default">
     <div class="panel-heading">Column</div>
-    <form role="form">
+    <form role="form" class="form-horizontal">
         <div class="panel-body">
             <text-field :display="'Title'"
                         :form="forms.editColumn"
                         :name="'title'"
                         :input.sync="forms.editColumn.title">
             </text-field>
+
+            <select-field :display="'Type'"
+                        :form="forms.editColumn"
+                        :name="'type'"
+                        :items="columnTypes"
+                        :input.sync="forms.editColumn.type">
+            </select-field>
         </div>
         <div class="panel-footer">
             <button v-on:click="updateColumn" class="btn btn-primary">Save</button>
@@ -22,21 +29,43 @@
         <button v-on:click="deleteColumn" class="btn btn-danger">Delete</button>
     </div>
 </div>
+
+<div v-if="column.type == ColumnTypes.COL_TEXT_FIELD">
+    <text-field :display="'Title'"
+                    :form="forms.editColumn"
+                    :name="'title'"
+                    :input.sync="forms.editColumn.title">
+    </text-field>
+</div>
+<div v-else>
+    <password-field :display="'Title'"
+                    :form="forms.editColumn"
+                    :name="'title'"
+                    :input.sync="forms.editColumn.title">
+    </password-field>
+</div>
 </template>
 
 <script>
 module.exports = {
 
+    mixins: [Spaceport.ColumnTypesMixin],
+
     ready: function () {
         this.getColumn(this.$route.params.columnId)
+        this.getColumnTypes()
     },
 
     data: function () {
         return {
-            column: null,
+            column: {
+                type: null
+            },
+            columnTypes: [],
             forms: {
                 editColumn: new SpaceportForm({
-                    title: ''
+                    title: '',
+                    type: '',
                 }),
             },
         }
@@ -45,6 +74,7 @@ module.exports = {
     watch: {
         'column': function(column) {
             this.forms.editColumn.title = column.title
+            this.forms.editColumn.type = column.type
         }
     },
 
@@ -55,6 +85,15 @@ module.exports = {
             this.$http.get('/api/columns/' + id)
                 .then(function (response) {
                     self.column = response.data;
+                });
+        },
+
+        getColumnTypes: function () {
+            var self = this;
+
+            this.$http.get('/api/columns/types/')
+                .then(function (response) {
+                    self.columnTypes = response.data;
                 });
         },
 

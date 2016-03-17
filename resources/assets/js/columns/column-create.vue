@@ -62,7 +62,6 @@ module.exports = {
             this.$http.get('/api/columns/types/')
                 .then(function (response) {
                     self.columnTypes = response.data;
-                    self.$log()
                 });
         },
     },

@@ -1,8 +1,8 @@
-// Define SpaceportHeaderMixin
-require('./header-mixin.js')
+// Define Vue Mixins
+require('./../mixins/bootstrap.js')
 
-// Load Vue custom filters
+// Define Vue custom filters
 require('./filters.js')
 
-// Load Form components
+// Define Form components
 require('./../forms/bootstrap.js')
