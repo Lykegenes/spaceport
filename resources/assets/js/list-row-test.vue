@@ -4,7 +4,7 @@
     <div class="panel-body">
         <div v-for="(name, input) in form.fields">
             <form-field-test :type="300"
-                            :display="getColumnDisplay(name) | capitalize"
+                            :display="findColumnByName(name).title | capitalize"
                             :form="form"
                             :name="name"
                             :input.sync="input">
@@ -24,33 +24,12 @@
 module.exports = {
 
     ready: function () {
-        var self = this
-
-        // copy each column name and its value in the form
-        _.each(this.columns, function (col) {
-            self.$set("form.fields['" + col.name + "']", col.input)
-        })
+        this.getListColumns(this.$route.params.listId)
     },
 
     data: function () {
         return {
-            columns: [
-                {
-                    display: 'Display Title 1',
-                    name: 'title 1',
-                    input: 'input 1',
-                },
-                {
-                    display: 'Display Title 2',
-                    name: 'title 2',
-                    input: 'input 2',
-                },
-            ],
-            /*form: {
-                errors: [],
-                busy:false,
-                fields:{}
-            },*/
+            columns: [],
             form: new SpaceportForm(),
             postData: null,
         }
@@ -58,18 +37,35 @@ module.exports = {
 
     methods : {
 
+        getListColumns: function (id) {
+            var self = this;
+
+            this.$http.get('/api/lists/' + id + '/columns')
+                .then(function (response) {
+                    self.columns = response.data;
+                    self.compileColumnsToFormFields()
+                    self.$log()
+                });
+        },
+
         // This should send the form to the server
         validate: function() {
             this.postData = this.form.fields
         },
 
         // Get the column's display
-        getColumnDisplay: function(name) {
-            var col = _.find(this.columns, function(col) {
-                return col.name === name
+        findColumnByName: function(name) {
+            return _.find(this.columns, function(col) {
+                return col.title === name
             })
+        },
 
-            return col.display
+        compileColumnsToFormFields: function() {
+            // copy each column name and its value in the form
+            var self = this
+            _.each(this.columns, function (col) {
+                self.$set("form.fields['" + col.title + "']", col.title)
+            })
         }
     },
 }

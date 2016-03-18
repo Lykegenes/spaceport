@@ -7,7 +7,7 @@ use Spaceport\Column;
 
 class ColTextField extends AbstractColumn
 {
-    public function makeCreateBlueprint(Blueprint $table, Column $column)
+    public function createWithBlueprint(Blueprint $table, Column $column)
     {
         $table->string($column->getSqlColumnName(), 255)->nullable();
     }

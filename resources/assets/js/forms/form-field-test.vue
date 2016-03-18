@@ -18,7 +18,7 @@
         </text-area>
     </template>
     <div v-else>
-        Column type is not supported.
+        This column type is not supported.
     </div>
 </template>
 
