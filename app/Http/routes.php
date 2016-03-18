@@ -51,4 +51,7 @@ Route::group(['prefix' => 'api', 'middleware' => ['api']], function ($router) {
     $router->get('/columns/{columnId}', 'ApiColumnController@get');
     $router->put('/columns/{columnId}', 'ApiColumnController@update');
     $router->delete('/columns/{columnId}', 'ApiColumnController@delete');
+
+    $router->get('/lists/{listId}/data', 'ApiListController@getListData');
+    $router->get('/lists/{listId}/row/{rowId}', 'ApiListController@getRowData');
 });

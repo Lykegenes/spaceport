@@ -6,6 +6,8 @@ window.SpaceportForm = function (data) {
 
     _.extend(this, data)
 
+    this.fields = {}
+
     this.errors = new SpaceportFormErrors();
     this.busy = false;
     this.successful = false;

@@ -25,6 +25,7 @@ class ApiColumnController extends Controller
     {
         $this->validate($request, [
             'title' => 'required|min:3|max:255',
+            'type' => 'required',
         ]);
 
         $column = ColumnRepository::update($id, $request->all());

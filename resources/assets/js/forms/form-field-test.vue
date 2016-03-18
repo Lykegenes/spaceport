@@ -1,0 +1,33 @@
+<template>
+    Display value : {{ display }} <br>
+    Form value : {{ form | json }} <br>
+    Name value : {{ name }} <br>
+    Input value : {{ input }}
+    <template v-if="isValidColumnType(type)">
+        <text-field v-if="type == ColumnTypes.COL_TEXT_FIELD"
+                    :display="display"
+                    :form="form"
+                    :name="name"
+                    :input.sync="input">
+        </text-field>
+        <text-area v-if="type == ColumnTypes.COL_TEXT_AREA"
+                    :display="display"
+                    :form="form"
+                    :name="name"
+                    :input.sync="input">
+        </text-area>
+    </template>
+    <div v-else>
+        Column type is not supported.
+    </div>
+</template>
+
+<script>
+    module.exports = {
+
+        mixins: [Spaceport.ColumnTypesMixin],
+
+        props: ['type', 'display', 'form', 'name', 'input'],
+
+    }
+</script>

@@ -22,6 +22,7 @@ class ColumnRepository
 
         $column->fill([
             'title' => $data['title'],
+            'type' => $data['type'],
         ])->save();
 
         return $column;
