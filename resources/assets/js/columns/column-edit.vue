@@ -29,21 +29,6 @@
         <button v-on:click="deleteColumn" class="btn btn-danger">Delete</button>
     </div>
 </div>
-
-<div v-if="column.type == ColumnTypes.COL_TEXT_FIELD">
-    <text-field :display="'Title'"
-                    :form="forms.editColumn"
-                    :name="'title'"
-                    :input.sync="forms.editColumn.title">
-    </text-field>
-</div>
-<div v-else>
-    <password-field :display="'Title'"
-                    :form="forms.editColumn"
-                    :name="'title'"
-                    :input.sync="forms.editColumn.title">
-    </password-field>
-</div>
 </template>
 
 <script>

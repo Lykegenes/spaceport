@@ -32,7 +32,7 @@ abstract class AbstractColumn
      * @param Blueprint $table  A Blueprint instance
      * @param Column    $column A Column instance
      */
-    public function createWithBlueprint(Blueprint $table, Column $column);
+    abstract public function createWithBlueprint(Blueprint $table, Column $column);
 
     /**
      * Checks if a Column exists in the database.

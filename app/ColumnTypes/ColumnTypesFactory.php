@@ -20,6 +20,9 @@ class ColumnTypesFactory implements ColumnTypesConstants
             case self::COL_TEXT_FIELD:
                 return new ColTextField;
 
+            case self::COL_TEXT_AREA:
+                return new ColTextArea;
+
             case self::COL_CREATED_AT:
             case self::COL_UPDATED_AT:
             case self::COL_DELETED_AT:
@@ -29,6 +32,8 @@ class ColumnTypesFactory implements ColumnTypesConstants
             case self::COL_UPDATED_BY:
             case self::COL_DELETED_BY:
                 break;
+            default:
+                throw new \Exception('Spaceport Fatal Error: Unsupported column type.');
         }
     }
 }
