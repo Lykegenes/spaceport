@@ -3,8 +3,8 @@
     <div class="panel-heading">View a list</div>
     <div class="panel-body">
         <div v-for="(name, input) in form.fields">
-            <form-field-test :type="findColumnByTitle(columns, name).type"
-                            :display="findColumnByTitle(columns, name).title | capitalize"
+            <form-field-test :type="listColumns.findByTitle(name).type"
+                            :display="listColumns.findByTitle(name).title | capitalize"
                             :form="form"
                             :name="name"
                             :input.sync="input">
@@ -15,7 +15,7 @@
         <button v-on:click="validate" class="btn btn-primary">Validate</button>
     </div>
 </div>
-    Column.input : {{ columns | json }} <br>
+    Column.input : {{ listColumns | json }} <br>
     Form Object : {{ form | json }} <br>
     Post data : {{ postData | json }}
 </template>
@@ -25,13 +25,12 @@ module.exports = {
 
     ready: function () {
         this.getListColumns(this.$route.params.listId)
-        this.getListItem(this.$route.params.listId, this.$route.params.itemId)
     },
 
     data: function () {
         return {
-            item: [],
-            columns: [],
+            listItem: new SpaceportListItem(),
+            listColumns: new SpaceportListColumns(),
             form: new SpaceportForm(),
             postData: null,
         }
@@ -44,8 +43,9 @@ module.exports = {
 
             this.$http.get('/api/lists/' + listId + '/columns')
                 .then(function (response) {
-                    self.columns = response.data
-                    self.initFormFieldsFromColumns('form', self.columns)
+                    self.listColumns.set(response.data)
+                    this.getListItem(this.$route.params.listId, this.$route.params.itemId)
+                    self.initFormFieldsFromColumns('form', self.listColumns)
                 });
         },
 
@@ -54,8 +54,8 @@ module.exports = {
 
             this.$http.get('/api/lists/' + listId + '/item/' + itemId)
                 .then(function (response) {
-                    self.item = response.data
-                    self.fillFormFieldsFromItem('form', self.columns, self.item)
+                    self.listItem.set(response.data)
+                    self.fillFormFieldsFromItem('form', self.listColumns, self.listItem)
                 });
         },
 
@@ -64,36 +64,21 @@ module.exports = {
             this.postData = this.form.fields
         },
 
-        // Get the column's display
-        findColumnByTitle: function(columns, title) {
-            return _.find(columns, function(col) {
-                return col.title === title
-            })
-        },
-
-        initFormFieldsFromColumns: function(formKeyPath, columns) {
+        initFormFieldsFromColumns: function(formKeyPath, listColumns) {
             // copy each column name in the form, and set it to an empty value
             var self = this
-            _.each(columns, function (col) {
+            _.each(listColumns.all(), function (col) {
                 self.$set(formKeyPath + ".fields['" + col.title + "']", '')
             })
         },
 
-        fillFormFieldsFromItem: function(formKeyPath, columns, item) {
+        fillFormFieldsFromItem: function(formKeyPath, listColumns, listItem) {
             // set every form field to this item's matching attribute, if it exists
             var self = this
-            _.each(columns, function (col) {
-                self.$set(formKeyPath + ".fields['" + col.title + "']", self.getItemAttribute(item, col.title))
+            _.each(listColumns.all(), function (col) {
+                self.$set(formKeyPath + ".fields['" + col.title + "']", listItem.get(col.title))
             })
         },
-
-        getItemAttribute: function(item, key) {
-            // return the attribute if it exists
-            if (_.indexOf(_.keys(item), key) > -1) {
-                return item[key]
-            }
-            return ''
-        }
     },
 }
 </script>
