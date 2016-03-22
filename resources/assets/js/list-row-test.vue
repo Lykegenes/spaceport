@@ -3,12 +3,13 @@
     <div class="panel-heading">View a list</div>
     <div class="panel-body">
         <div v-for="(name, input) in form.fields">
-            <form-field-test :type="findColumnByName(name).type"
-                            :display="findColumnByName(name).title | capitalize"
-                            :form="form"
-                            :name="name"
-                            :input.sync="input">
-            </form-field-test>
+            <form-field-builder
+                        :type="findColumnByName(name).type"
+                        :display="findColumnByName(name).title | capitalize"
+                        :form="form"
+                        :name="name"
+                        :input.sync="input">
+            </form-field-builder>
         </div>
     </div>
     <div class="panel-footer">
