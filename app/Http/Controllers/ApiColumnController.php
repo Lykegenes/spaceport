@@ -18,6 +18,8 @@ class ApiColumnController extends Controller
         return [
             ['text' => 'Text Field', 'value' => ColumnTypesConstants::COL_TEXT_FIELD],
             ['text' => 'Text Area', 'value' => ColumnTypesConstants::COL_TEXT_AREA],
+            ['text' => 'Integer', 'value' => ColumnTypesConstants::COL_INTEGER],
+            ['text' => 'Date', 'value' => ColumnTypesConstants::COL_DATE],
         ];
     }
 

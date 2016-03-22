@@ -2,6 +2,7 @@
 
 <!-- Vendors, compiled using Gulp -->
 <script src="{{ asset('/js/jquery.min.js') }}" type="text/javascript"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
 <script src="{{ asset('/dist/js/vendor.js') }}" type="text/javascript"></script>
 
 <!-- AdminLTE App -->

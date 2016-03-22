@@ -16,6 +16,18 @@
                     :name="name"
                     :input.sync="input">
         </text-area>
+        <number-field v-if="type == ColumnTypes.COL_INTEGER"
+                    :display="display"
+                    :form="form"
+                    :name="name"
+                    :input.sync="input">
+        </number-field>
+        <date-field v-if="type == ColumnTypes.COL_DATE"
+                    :display="display"
+                    :form="form"
+                    :name="name"
+                    :input.sync="input">
+        </date-field>
     </template>
     <div v-else>
         This column type is not supported.
