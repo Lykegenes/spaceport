@@ -67,5 +67,9 @@ SpaceportRouter.map({
     '/list/:listId': {
         name: 'view.list',
         component: require('./../list-row-test.vue'),
-    }
+    },
+    '/list/:listId/item/:itemId': {
+        name: 'view.list.item',
+        component: require('./../list-item-show.vue'),
+    },
 });

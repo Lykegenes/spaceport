@@ -16,12 +16,12 @@ class ApiListDataController extends Controller
         return response()->json($listData);
     }
 
-    public function getRowData($listId, $rowId)
+    public function getItemData($listId, $itemId)
     {
         $list = ListRepository::getById($listId);
 
-        $rowData = ListDataRepository::row($list, $rowId);
+        $itemData = ListDataRepository::row($list, $itemId);
 
-        return response()->json($rowData);
+        return response()->json($itemData);
     }
 }

@@ -1,5 +1,6 @@
 window.Spaceport = {}
 
+Vue.config.devtools = true
 Vue.config.debug = true
 
 /*
