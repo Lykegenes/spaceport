@@ -64,22 +64,4 @@ class ApiListController extends Controller
 
         return $column->toJson();
     }
-
-    public function getListData($listId)
-    {
-        $list = ListRepository::getById($listId);
-
-        $listData = \Spaceport\Repositories\ListDataRepository::all($list);
-
-        return response()->json($listData);
-    }
-
-    public function getRowData($listId, $rowId)
-    {
-        $list = ListRepository::getById($listId);
-
-        $rowData = \Spaceport\Repositories\ListDataRepository::row($list, $rowId);
-
-        return response()->json($rowData);
-    }
 }
