@@ -14,10 +14,17 @@ require('./elixir-vendor');
  */
 
 elixir(function(mix) {
+
+    // All Spaceport vendors CSS.
+    mix.sass('vendor.scss', 'public/dist/css/vendor.css')
+        .copy('node_modules/font-awesome/fonts', 'public/dist/fonts');
+
+    // Exclude vendors from Spaceport.js
     elixir.config.js.browserify.externals.push('vue', 'vue-resource', 'vue-router','vue-hot-reload-api', 'underscore');
 
+    // Compile the external vendors in their own file
     mix.vendor('core/vendor.js', 'public/dist/js/vendor.js');
 
+    // Compile the Spaceport Vue application
     mix.browserify('spaceport.js', 'public/dist/js/spaceport.js');
-    mix.sass('app.scss', 'public/dist/css/app.css');
 });

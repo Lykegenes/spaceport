@@ -4,11 +4,14 @@
     "gulp": "^3.8.8"
   },
   "dependencies": {
+    "awesome-bootstrap-checkbox": "^1.0.0-alpha.2",
     "bootstrap-datepicker": "^1.6.0",
     "bootstrap-sass": "^3.3.2",
+    "font-awesome": "^4.5.0",
     "jquery": "^2.2.1",
     "laravel-elixir": "^5.0.0",
     "laravel-elixir-vueify": "^1.0.2",
+    "select2": "^4.0.2",
     "underscore": "^1.8.3",
     "vue": "^1.0.18",
     "vue-resource": "^0.7.0",
