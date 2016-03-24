@@ -20,6 +20,8 @@ class ApiColumnController extends Controller
             ['text' => 'Text Area', 'value' => ColumnTypesConstants::COL_TEXT_AREA],
             ['text' => 'Integer', 'value' => ColumnTypesConstants::COL_INTEGER],
             ['text' => 'Date', 'value' => ColumnTypesConstants::COL_DATE],
+            ['text' => 'Radio', 'value' => ColumnTypesConstants::COL_RADIO],
+            ['text' => 'Checkbox', 'value' => ColumnTypesConstants::COL_CHECKBOX],
         ];
     }
 

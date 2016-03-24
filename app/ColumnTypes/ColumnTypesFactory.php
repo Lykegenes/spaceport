@@ -29,6 +29,10 @@ class ColumnTypesFactory implements ColumnTypesConstants
             case self::COL_DATE:
                 return new ColDateField;
 
+            case self::COL_RADIO:
+            case self::COL_CHECKBOX:
+                return new ColTextField;
+
             case self::COL_CREATED_AT:
             case self::COL_UPDATED_AT:
             case self::COL_DELETED_AT:

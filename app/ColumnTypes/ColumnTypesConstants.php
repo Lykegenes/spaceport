@@ -42,10 +42,12 @@ interface ColumnTypesConstants
     const COL_DATETIME_TZ = 602;
 
     // 700-799 : Dropdown-based columns
-    const COL_CHOICES = 700;
-    const COL_CHOICES_CUSTOM = 701;
-    const COL_CHOICES_MULTIPLE = 702;
-    const COL_CHOICES_CUSTOM_MULTIPLE = 703;
+    const COL_RADIO = 700;
+    const COL_CHECKBOX = 701;
+    const COL_SELECT = 702;
+    const COL_SELECT_MULTIPLE = 703;
+    const COL_SELECT_CUSTOM = 704;
+    const COL_SELECT_CUSTOM_MULTIPLE = 705;
     const COL_LOOKUP = 710;
     const COL_LOOKUP_MULTIPLE = 711;
 

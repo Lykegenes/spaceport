@@ -5,7 +5,7 @@
             <div class="radio" v-for="item in items">
                 <label>
                     <input type="radio" :name="item.name" :value="item.value" v-model="input">
-                    {{ item.text }}
+                    <span>{{ item.text }}</span>
                 </label>
             </div>
 

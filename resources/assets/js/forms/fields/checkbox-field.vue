@@ -5,7 +5,7 @@
             <div class="checkbox" v-for="item in items">
                 <label>
                     <input type="checkbox" :name="item.name" :value="item.value" v-model="input">
-                    {{ item.text }}
+                    <span>{{ item.text }}</span>
                 </label>
             </div>
 

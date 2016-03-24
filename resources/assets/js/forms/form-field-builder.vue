@@ -28,6 +28,20 @@
                     :name="name"
                     :input.sync="input">
         </date-field>
+        <radio-field v-if="type == ColumnTypes.COL_RADIO"
+                    :display="display"
+                    :form="form"
+                    :name="name"
+                    :items="[{text: 'one', value: 1}, {text: 'two', value: 2}]"
+                    :input.sync="input">
+        </radio-field>
+        <checkbox-field v-if="type == ColumnTypes.COL_CHECKBOX"
+                    :display="display"
+                    :form="form"
+                    :name="name"
+                    :items="[{text: 'one', value: 1}, {text: 'two', value: 2}]"
+                    :input.sync="input">
+        </checkbox-field>
     </template>
     <div v-else>
         This column type is not supported.
