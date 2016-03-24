@@ -40,4 +40,4 @@ require('bootstrap-datepicker');
 /**
  * Load Select2 files
  */
-//require('select2');
+require('select2');
