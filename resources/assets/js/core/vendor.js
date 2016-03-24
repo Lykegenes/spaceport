@@ -36,3 +36,8 @@ require('bootstrap-sass');
  * Load Bootstrap DatePicker files
  */
 require('bootstrap-datepicker');
+
+/**
+ * Load Select2 files
+ */
+//require('select2');

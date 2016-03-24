@@ -3,6 +3,9 @@
     <title> Spaceport - @yield('htmlheader_title', 'Your title here') </title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
 
+    <!-- Load all common Spaceport vendors CSS. See Gulpfile for details, -->
+    <link href="{{ asset('/dist/css/vendor.css') }}" rel="stylesheet" type="text/css" />
+
     <!-- Theme style -->
     <link href="{{ asset('/css/AdminLTE.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
@@ -10,11 +13,6 @@
           apply the skin class to the body tag so the changes take effect.
     -->
     <link href="{{ asset('/css/skins/skin-blue.min.css') }}" rel="stylesheet" type="text/css" />
-    <!-- iCheck -->
-    <link href="{{ asset('/plugins/iCheck/square/blue.css') }}" rel="stylesheet" type="text/css" />
-
-    <!-- Load all common Spaceport vendors CSS. See Gulpfile for details, -->
-    <link href="{{ asset('/dist/css/vendor.css') }}" rel="stylesheet" type="text/css" />
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

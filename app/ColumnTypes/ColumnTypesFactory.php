@@ -31,6 +31,7 @@ class ColumnTypesFactory implements ColumnTypesConstants
 
             case self::COL_RADIO:
             case self::COL_CHECKBOX:
+            case self::COL_SELECT:
                 return new ColTextField;
 
             case self::COL_CREATED_AT:

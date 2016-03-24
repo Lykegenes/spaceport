@@ -1,4 +1,7 @@
+// Bootstrap v3 (vanilla)
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
+// Bootstrap datepicker
 @import "node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker3";
 
 // Font-Awesome
@@ -8,3 +11,6 @@ $fa-font-path: "../fonts";
 // Awesome Bootstrap Checkbox
 //@import "node_modules/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.scss";
 @import "./checkbox.scss";
+
+// Select2
+//@import "node_modules/select2/src/scss/core"
