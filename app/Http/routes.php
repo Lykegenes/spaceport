@@ -54,4 +54,6 @@ Route::group(['prefix' => 'api', 'middleware' => ['api']], function ($router) {
 
     $router->get('/lists/{listId}/data', 'ApiListDataController@getListData');
     $router->get('/lists/{listId}/item/{itemId}', 'ApiListDataController@getItemData');
+
+    $router->get('/lists/{listId}/validate', 'ApiListDataController@validateData');
 });

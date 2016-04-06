@@ -35,21 +35,21 @@ class ColumnServiceProvider extends ServiceProvider
 
     protected function createListeColumn(Column $column)
     {
-        $abstractColumnType = ColumnTypesFactory::make($column->type);
+        $abstractColumnType = ColumnTypesFactory::make($column);
 
-        $abstractColumnType->create($column);
+        $abstractColumnType->create();
 
         // The column should now exist.
-        return $abstractColumnType->exists($column);
+        return $abstractColumnType->exists();
     }
 
     protected function dropListeColumn(Column $column)
     {
-        $abstractColumnType = ColumnTypesFactory::make($column->type);
+        $abstractColumnType = ColumnTypesFactory::make($column);
 
-        $abstractColumnType->drop($column);
+        $abstractColumnType->drop();
 
         // The column shouldn't exist anymore.
-        return ! $abstractColumnType->exists($column);
+        return ! $abstractColumnType->exists();
     }
 }

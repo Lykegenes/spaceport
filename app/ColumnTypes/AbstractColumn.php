@@ -9,19 +9,30 @@ use Spaceport\Column;
 abstract class AbstractColumn
 {
     /**
+     * A Column model instance.
+     * @var Spaceport\Column
+     */
+    protected $column;
+
+    public function __construct(Column $column)
+    {
+        $this->column = $column;
+    }
+    /**
      * Create a new Column in the database.
-     * @param  Column $column A Column instance
      * @return bool   True if the operation was successful
      */
-    public function create(Column $column)
+    public function create()
     {
+        $column = $this->column;
+
         if ($this->exists($column)) {
             return false;
         }
 
         $self = $this;
-        Schema::table($column->liste->getSqlTableName(), function ($table) use ($self, $column) {
-            $self->createWithBlueprint($table, $column);
+        Schema::table($column->liste->getSqlTableName(), function ($table) use ($self) {
+            $self->createWithBlueprint($table);
         });
 
         return $this->exists($column);
@@ -30,30 +41,29 @@ abstract class AbstractColumn
     /**
      * Create a Column from the database using the specified Blueprint.
      * @param Blueprint $table  A Blueprint instance
-     * @param Column    $column A Column instance
      */
-    abstract public function createWithBlueprint(Blueprint $table, Column $column);
+    abstract public function createWithBlueprint(Blueprint $table);
 
     /**
      * Checks if a Column exists in the database.
-     * @param  Column $column A Column instance
      * @return bool   True if the tables exists
      */
-    public function exists(Column $column)
+    public function exists()
     {
+        $column = $this->column;
+
         return Schema::hasColumn($column->liste->getSqlTableName(), $column->getSqlColumnName());
     }
 
     /**
-     * The validation rules for this Column Instance.
-     * @param  Column $column A Column instance
+     * The common validation rules for this Column Instance.
      * @return array  An array of validation rules
      */
-    public function validationRules(Column $column)
+    private function buildCommonRules()
     {
         $rules = [];
 
-        if ($column->is_required) {
+        if ($this->column->is_required) {
             $rules[] = 'required';
         }
 
@@ -61,14 +71,24 @@ abstract class AbstractColumn
     }
 
     /**
-     * Validates an input for this Column instance.
-     * @param  Column $column A Column instance
-     * @param  mixed  $input  The input from the Request
-     * @return bool   True if the input passed the validation tests
+     * The specific validation rules for this type of column.
+     * @return array  An array of validation rules
      */
-    public function validate(Column $column, $input)
+    protected function buildOwnRules()
     {
-        return true; // for now
+        // Has to be implemented by each specific column type.
+        return [];
+    }
+
+    /**
+     * The complete validation rules for this column, formatted for Laravel's Validator.
+     * @return array  An array of validation rules, formatted for Laravel's Validator
+     */
+    public function compileRules()
+    {
+        $rules = array_merge($this->buildCommonRules(), $this->buildOwnRules());
+
+        return [ $this->column->title => implode('|', $rules) ];
     }
 
     /**
@@ -76,8 +96,10 @@ abstract class AbstractColumn
      * @param  Column $column A Column instance
      * @return bool   True if the operation was successful
      */
-    public function drop(Column $column)
+    public function drop()
     {
+        $column = $this->column;
+
         if (! $this->exists($column)) {
             return false;
         }
@@ -95,8 +117,8 @@ abstract class AbstractColumn
      * @param Blueprint $table  A Blueprint instance
      * @param Column    $column A Column instance
      */
-    public function dropWithBlueprint(Blueprint $table, Column $column)
+    public function dropWithBlueprint(Blueprint $table)
     {
-        $table->dropColumn($column->getSqlColumnName());
+        $table->dropColumn($this->column->getSqlColumnName());
     }
 }

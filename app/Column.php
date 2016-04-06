@@ -3,6 +3,7 @@
 namespace Spaceport;
 
 use Illuminate\Database\Eloquent\Model;
+use Spaceport\ColumnTypes\ColumnTypesFactory;
 
 class Column extends Model
 {

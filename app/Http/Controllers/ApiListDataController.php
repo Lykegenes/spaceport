@@ -24,4 +24,11 @@ class ApiListDataController extends Controller
 
         return response()->json($itemData);
     }
+
+    public function validateData($listId)
+    {
+        $list = ListRepository::getById($listId);
+
+        ListDataRepository::validate($list);
+    }
 }

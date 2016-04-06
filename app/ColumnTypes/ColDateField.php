@@ -7,13 +7,15 @@ use Spaceport\Column;
 
 class ColDateField extends AbstractColumn
 {
-    public function createWithBlueprint(Blueprint $table, Column $column)
+    public function createWithBlueprint(Blueprint $table)
     {
-        $table->datetime($column->getSqlColumnName())->nullable();
+        $table->datetime($this->column->getSqlColumnName())->nullable();
     }
 
-    public function validate(Column $column, $input)
+    protected function buildOwnRules()
     {
-        return parent::validate($column, $input);
+        $rules = ['date'];
+
+        return $rules;
     }
 }
