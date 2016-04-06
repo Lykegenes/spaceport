@@ -16,7 +16,6 @@
 </template>
 
 <script>
-
     module.exports = {
 
         props: ['display', 'form', 'name', 'input'],

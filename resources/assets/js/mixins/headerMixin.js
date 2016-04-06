@@ -12,17 +12,17 @@ window.Spaceport.HeaderData = {
 window.Spaceport.HeaderMixin = {
 
     methods: {
-        setHeaderTitle: function (text) {
+        setHeaderTitle (text) {
             Vue.set(Spaceport.HeaderData.titles, this._titleIndex, text)
         },
 
-        setBreadcrumb: function(text) {
+        setBreadcrumb (text) {
             Vue.set(Spaceport.HeaderData.breadcrumbs, this._breadcrumbIndex, text)
         }
     },
 
     route: {
-        activate: function (transition) {
+        activate (transition) {
             this._titleIndex = Spaceport.HeaderData.titles.length
             Spaceport.HeaderData.titles.length++
 
@@ -31,7 +31,7 @@ window.Spaceport.HeaderMixin = {
             transition.next()
         },
 
-        deactivate: function (transition) {
+        deactivate (transition) {
             Spaceport.HeaderData.titles.splice(this._titleIndex, 1)
             Spaceport.HeaderData.breadcrumbs.splice(this._breadcrumbIndex, 1)
             transition.next()

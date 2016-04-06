@@ -18,17 +18,20 @@
 </div>
     Column.input : {{ listColumns | json }} <br>
     Form Object : {{ form | json }} <br>
-    Post data : {{ postData | json }}
+    Post data : {{ postData | json }}<br>
+
+    <spaceport-loading></spaceport-loading>
+
 </template>
 
 <script>
 module.exports = {
 
-    ready: function () {
+    ready () {
         this.getListColumns(this.$route.params.listId)
     },
 
-    data: function () {
+    data () {
         return {
             listItem: new SpaceportListItem(),
             listColumns: new SpaceportListColumns(),
@@ -37,9 +40,9 @@ module.exports = {
         }
     },
 
-    methods : {
+    methods: {
 
-        getListColumns: function (listId) {
+        getListColumns (listId) {
             this.$http.get('/api/lists/' + listId + '/columns')
                 .then(function (response) {
                     this.listColumns.set(response.data)
@@ -48,7 +51,7 @@ module.exports = {
                 });
         },
 
-        getListItem: function (listId, itemId) {
+        getListItem (listId, itemId) {
             this.$http.get('/api/lists/' + listId + '/item/' + itemId)
                 .then(function (response) {
                     this.listItem.set(response.data)
@@ -57,7 +60,7 @@ module.exports = {
         },
 
         // This should send the form to the server
-        validate: function() {
+        validate () {
             this.postData = this.form.fields
         },
     },

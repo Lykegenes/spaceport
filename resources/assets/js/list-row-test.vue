@@ -24,11 +24,11 @@
 <script>
 module.exports = {
 
-    ready: function () {
+    ready () {
         this.getListColumns(this.$route.params.listId)
     },
 
-    data: function () {
+    data () {
         return {
             columns: [],
             form: new SpaceportForm(),
@@ -38,7 +38,7 @@ module.exports = {
 
     methods : {
 
-        getListColumns: function (id) {
+        getListColumns (id) {
             var self = this;
 
             this.$http.get('/api/lists/' + id + '/columns')
@@ -50,18 +50,18 @@ module.exports = {
         },
 
         // This should send the form to the server
-        validate: function() {
+        validate() {
             this.postData = this.form.fields
         },
 
         // Get the column's display
-        findColumnByName: function(name) {
+        findColumnByName (name) {
             return _.find(this.columns, function(col) {
                 return col.title === name
             })
         },
 
-        compileColumnsToFormFields: function() {
+        compileColumnsToFormFields () {
             // copy each column name and its value in the form
             var self = this
             _.each(this.columns, function (col) {

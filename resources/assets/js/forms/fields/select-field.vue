@@ -20,7 +20,7 @@
 
         props: ['display', 'form', 'name', 'items', 'input'],
 
-        ready: function () {
+        ready () {
             $('#' + this.id).select2({
                 placeholder: this.display,
                 allowClear: true,
@@ -28,14 +28,14 @@
             });
         },
 
-        data: function () {
+        data () {
             return {
                 // Generate a Unique ID using Underscore; Select2 needs it to reference the input
                 id: _.uniqueId('select2_'),
             }
         },
 
-        deactivate: function (done) {
+        deactivate (done) {
             $('#' + this.id).select2("destroy");
         }
 
