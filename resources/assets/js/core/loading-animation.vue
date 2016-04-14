@@ -20,6 +20,10 @@ module.exports = {
               type: Boolean,
               default: true
         },
+        center: {
+            type: Boolean,
+            default: false
+        },
         color: {
               type: String,
               default: '#3c8dbc'
@@ -60,6 +64,7 @@ module.exports = {
     computed: {
         containerStyle () {
             return {
+                margin: (this.center ? 'auto' : null),
                 width: parseFloat(this.size) * 3 + parseFloat(this.margin) * 6 + 'px',
                 fontSize: 0
             }

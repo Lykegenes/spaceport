@@ -2,6 +2,9 @@
 <div class="panel panel-default">
     <div class="panel-heading">View a list</div>
     <div class="panel-body">
+
+    <spaceport-loading></spaceport-loading>
+
         <div v-for="(name, input) in form.fields">
             <form-field-builder
                         :type="listColumns.findByTitle(name).type"
@@ -19,8 +22,6 @@
     Column.input : {{ listColumns | json }} <br>
     Form Object : {{ form | json }} <br>
     Post data : {{ postData | json }}<br>
-
-    <spaceport-loading></spaceport-loading>
 
 </template>
 
