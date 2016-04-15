@@ -35,6 +35,7 @@
             <!-- Optionally, you can add icons to the links -->
             <li v-link-active><a v-link="{ name: 'list.index' }"><i class='fa fa-link'></i> <span>Lists</span></a></li>
             <li v-link-active><a v-link="{ name: 'users.index' }"><i class='fa fa-link'></i> <span>Users</span></a></li>
+            <li v-link-active><a v-link="{ name: 'view.datagrid' }"><i class='fa fa-link'></i> <span>Datagrid</span></a></li>
 
             <li class="treeview" v-link-active>
               <a v-link="{ name: 'settings' }"><i class='fa fa-link'></i> <span>Settings</span> <i class="fa fa-angle-left pull-right"></i></a>

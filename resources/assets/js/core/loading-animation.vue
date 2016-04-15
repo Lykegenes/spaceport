@@ -1,14 +1,14 @@
 <template>
     <div class="v-spinner" v-bind:style="containerStyle" v-show="loading">
-        <div class="v-grid v-grid1" v-bind:style="[spinnerStyle,animationStyle,animationStyleRandomize()]"></div>
-        <div class="v-grid v-grid2" v-bind:style="[spinnerStyle,animationStyle,animationStyleRandomize()]"></div>
-        <div class="v-grid v-grid3" v-bind:style="[spinnerStyle,animationStyle,animationStyleRandomize()]"></div>
-        <div class="v-grid v-grid4" v-bind:style="[spinnerStyle,animationStyle,animationStyleRandomize()]"></div>
-        <div class="v-grid v-grid5" v-bind:style="[spinnerStyle,animationStyle,animationStyleRandomize()]"></div>
-        <div class="v-grid v-grid6" v-bind:style="[spinnerStyle,animationStyle,animationStyleRandomize()]"></div>
-        <div class="v-grid v-grid7" v-bind:style="[spinnerStyle,animationStyle,animationStyleRandomize()]"></div>
-        <div class="v-grid v-grid8" v-bind:style="[spinnerStyle,animationStyle,animationStyleRandomize()]"></div>
-        <div class="v-grid v-grid9" v-bind:style="[spinnerStyle,animationStyle,animationStyleRandomize()]"></div>
+        <div class="v-grid" v-bind:style="[spinnerStyle,animationStyle,animationStyleRandomize()]"></div>
+        <div class="v-grid" v-bind:style="[spinnerStyle,animationStyle,animationStyleRandomize()]"></div>
+        <div class="v-grid" v-bind:style="[spinnerStyle,animationStyle,animationStyleRandomize()]"></div>
+        <div class="v-grid" v-bind:style="[spinnerStyle,animationStyle,animationStyleRandomize()]"></div>
+        <div class="v-grid" v-bind:style="[spinnerStyle,animationStyle,animationStyleRandomize()]"></div>
+        <div class="v-grid" v-bind:style="[spinnerStyle,animationStyle,animationStyleRandomize()]"></div>
+        <div class="v-grid" v-bind:style="[spinnerStyle,animationStyle,animationStyleRandomize()]"></div>
+        <div class="v-grid" v-bind:style="[spinnerStyle,animationStyle,animationStyleRandomize()]"></div>
+        <div class="v-grid" v-bind:style="[spinnerStyle,animationStyle,animationStyleRandomize()]"></div>
     </div>
 </template>
 

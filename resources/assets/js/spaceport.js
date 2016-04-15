@@ -1,7 +1,8 @@
 window.Spaceport = {}
 
-Vue.config.devtools = true
-Vue.config.debug = true
+var isDevEnv = (location.hostname.split('.').shift() === 'localhost')
+Vue.config.devtools = isDevEnv
+Vue.config.debug = isDevEnv
 
 /*
  * Load the Spaceport components.

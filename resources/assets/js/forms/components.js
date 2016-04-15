@@ -9,3 +9,6 @@ Vue.component('checkbox-field', require('./fields/checkbox-field.vue'))
 
 // Load the Spaceport Form Field Builder component
 Vue.component('form-field-builder', require('./form-field-builder.vue'))
+
+// Load the Spaceport Datagrid Builder component
+Vue.component('datagrid-builder', require('./datagrid-builder.vue'))

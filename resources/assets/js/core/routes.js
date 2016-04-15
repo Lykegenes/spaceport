@@ -72,4 +72,8 @@ SpaceportRouter.map({
         name: 'view.list.item',
         component: require('./../list-item-show.vue'),
     },
+    '/datagrid': {
+        name: 'view.datagrid',
+        component: require('./../datagrid-test.vue'),
+    },
 });
