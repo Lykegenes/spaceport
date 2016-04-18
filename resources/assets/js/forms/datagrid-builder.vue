@@ -1,20 +1,28 @@
 <template>
 
+    <div class="pull-right">
+        <input class="form-control pull-right" placeholder="Search" type="text" v-model="searchQuery">
+    </div>
+
     <table :class="tableClass">
         <thead>
             <tr>
-              <th v-for="col in columns">{{{ col.name }}}</th>
+              <th v-for="h in headers" :class="this._orderClass(h)" @click="this._clickOrderByTh(h)">{{{ h.name }}}</th>
             </tr>
         </thead>
         <tbody>
-            <tr v-for="line in rows | limitBy pageSize pageFirstRowIndex">
-                <td v-for="r in line">{{{ r.value }}}</td>
+            <tr v-for="line in filteredRows
+                        | orderBy orderByCol orderAscForFilter
+                        | limitBy pageSize pageFirstRowIndex">
+
+                <td v-for="value in line">{{{ value }}}</td>
+
             </tr>
         </tbody>
     </table>
 
-    <div class="pull-left">
-        <span>Showing {{{ pageFirstRowIndex }}} to {{{ pageLastRowIndex }}} of {{{ rows.length }}} rows.</span>
+    <div v-if="pageLinks" class="pull-left">
+        <span>Showing {{{ pageFirstRowIndex }}} to {{{ pageLastRowIndex }}} of {{{ filteredRows.length }}} rows.</span>
         <span>{{{ pageSize }}} records per page.</span>
     </div>
 
@@ -35,7 +43,7 @@
             model: Array,
             pageSize: {
                 type: Number,
-                default: 2
+                default: 10
             },
             pageIndex: {
                 type: Number,
@@ -45,13 +53,17 @@
                 type: Number,
                 default: 2
             },
-            orderBy: {
-                type: Number,
-                default: 0
+            orderByCol: {
+                type: String,
+                default: 'id'
             },
             orderAsc: {
                 type: Boolean,
-                default: false
+                default: true
+            },
+            searchQuery: {
+                type: String,
+                default: null
             },
             /*wrapLines: {
                 type: Boolean,
@@ -77,39 +89,51 @@
 
         data () {
             return {
-                columns: [
+                headers: [
                     {key: 'id', name: 'Id'},
                     {key: 'task', name: 'Task'},
                     {key: 'label', name: 'Label'},
                 ],
+                searchableColumns: [
+                    'id', 'task'
+                ],
                 rows: [
-                    [ {key: "id", value: 1}, {key: "task", value: "Update software"}, {key: "label", value: 55} ],
-                    [ {key: "id", value: 2}, {key: "task", value: "Clean Database"}, {key: "label", value: 70} ],
-                    [ {key: "id", value: 3}, {key: "task", value: "Cron job running"}, {key: "label", value: 30} ],
-                    [ {key: "id", value: 4}, {key: "task", value: "Fix and squish bugs"}, {key: "label", value: 90} ],
-                    [ {key: "id", value: 1}, {key: "task", value: "Update software"}, {key: "label", value: 55} ],
-                    [ {key: "id", value: 2}, {key: "task", value: "Clean Database"}, {key: "label", value: 70} ],
-                    [ {key: "id", value: 3}, {key: "task", value: "Cron job running"}, {key: "label", value: 30} ],
-                    [ {key: "id", value: 4}, {key: "task", value: "Fix and squish bugs"}, {key: "label", value: 90} ],
-                    [ {key: "id", value: 1}, {key: "task", value: "Update software"}, {key: "label", value: 55} ],
-                    [ {key: "id", value: 2}, {key: "task", value: "Clean Database"}, {key: "label", value: 70} ],
-                    [ {key: "id", value: 3}, {key: "task", value: "Cron job running"}, {key: "label", value: 30} ],
-                    [ {key: "id", value: 4}, {key: "task", value: "Fix and squish bugs"}, {key: "label", value: 90} ],
-                    [ {key: "id", value: 1}, {key: "task", value: "Update software"}, {key: "label", value: 55} ],
-                    [ {key: "id", value: 2}, {key: "task", value: "Clean Database"}, {key: "label", value: 70} ],
-                    [ {key: "id", value: 3}, {key: "task", value: "Cron job running"}, {key: "label", value: 30} ],
-                    [ {key: "id", value: 4}, {key: "task", value: "Fix and squish bugs"}, {key: "label", value: 90} ],
-                    [ {key: "id", value: 1}, {key: "task", value: "Update software"}, {key: "label", value: 55} ],
-                    [ {key: "id", value: 2}, {key: "task", value: "Clean Database"}, {key: "label", value: 70} ],
-                    [ {key: "id", value: 3}, {key: "task", value: "Cron job running"}, {key: "label", value: 30} ],
-                    [ {key: "id", value: 4}, {key: "task", value: "Fix and squish bugs"}, {key: "label", value: 90} ],
-                    [ {key: "id", value: 1}, {key: "task", value: "Update software"}, {key: "label", value: 55} ],
-                    [ {key: "id", value: 2}, {key: "task", value: "Clean Database"}, {key: "label", value: 70} ],
-                    [ {key: "id", value: 3}, {key: "task", value: "Cron job running"}, {key: "label", value: 30} ],
-                    [ {key: "id", value: 4}, {key: "task", value: "Fix and squish bugs"}, {key: "label", value: 90} ],
-                    [ {key: "id", value: 1}, {key: "task", value: "Update software"}, {key: "label", value: 55} ],
-                    [ {key: "id", value: 2}, {key: "task", value: "Clean Database"}, {key: "label", value: 70} ],
-                    [ {key: "id", value: 3}, {key: "task", value: "Cron job running"}, {key: "label", value: 30} ],
+                    { id: 1, task: "Update Software", label: 55 },
+                    { id: 2, task: "Clean Database", label: 70 },
+                    { id: 3, task: "Cron job running", label: 30 },
+                    { id: 4, task: "Fix and squish bugs", label: 90 },
+                    { id: 1, task: "Update Software", label: 55 },
+                    { id: 2, task: "Clean Database", label: 70 },
+                    { id: 3, task: "Cron job running", label: 30 },
+                    { id: 4, task: "Fix and squish bugs", label: 90 },
+                    { id: 1, task: "Update Software", label: 55 },
+                    { id: 2, task: "Clean Database", label: 70 },
+                    { id: 3, task: "Cron job running", label: 30 },
+                    { id: 4, task: "Fix and squish bugs", label: 90 },
+                    { id: 1, task: "Update Software", label: 55 },
+                    { id: 2, task: "Clean Database", label: 70 },
+                    { id: 3, task: "Cron job running", label: 30 },
+                    { id: 4, task: "Fix and squish bugs", label: 90 },
+                    { id: 1, task: "Update Software", label: 55 },
+                    { id: 2, task: "Clean Database", label: 70 },
+                    { id: 3, task: "Cron job running", label: 30 },
+                    { id: 4, task: "Fix and squish bugs", label: 90 },
+                    { id: 1, task: "Update Software", label: 55 },
+                    { id: 2, task: "Clean Database", label: 70 },
+                    { id: 3, task: "Cron job running", label: 30 },
+                    { id: 4, task: "Fix and squish bugs", label: 90 },
+                    { id: 1, task: "Update Software", label: 55 },
+                    { id: 2, task: "Clean Database", label: 70 },
+                    { id: 3, task: "Cron job running", label: 30 },
+                    { id: 4, task: "Fix and squish bugs", label: 90 },
+                    { id: 1, task: "Update Software", label: 55 },
+                    { id: 2, task: "Clean Database", label: 70 },
+                    { id: 3, task: "Cron job running", label: 30 },
+                    { id: 4, task: "Fix and squish bugs", label: 90 },
+                    { id: 1, task: "Update Software", label: 55 },
+                    { id: 2, task: "Clean Database", label: 70 },
+                    { id: 3, task: "Cron job running", label: 30 },
+                    { id: 4, task: "Fix and squish bugs", label: 90 },
                 ],
             }
         },
@@ -132,26 +156,76 @@
                 return this.pageSize * this.pageIndex;
             },
             pageLastRowIndex: function () {
-                return Math.min(this.pageFirstRowIndex + this.pageSize, this.rows.length);
+                return Math.min(this.pageFirstRowIndex + this.pageSize, this.filteredRows.length);
             },
             lastPage: function () {
                 if (this.pageSize == 0 || this.rows.length == 0) {
                     return 0;
                 }
-                return Math.floor((this.rows.length - 1) / this.pageSize);
+                return Math.floor((this.filteredRows.length - 1) / this.pageSize);
             },
             pageLinks: function () {
                 var start = Math.max(this.pageIndex - this.pageLinksNumber, 0)
                 var end = Math.min(this.pageIndex + this.pageLinksNumber, this.lastPage)
                 return _.range(start, end + 1, 1);
             },
+            orderAscForFilter: function () {
+                return this.orderAsc ? 1 : -1
+            },
+            filteredRows: function () {
+                var filter = Vue.filter('filterBy')
+                return filter(this.rows, this.searchQuery, this.searchableColumns)
+            },
         },
 
         methods: {
-            sortFunc: function () {
-
-            }
-        }
+            _orderClass: function (th) {
+                return {
+                    'order': _.contains(this.searchableColumns, th.key),
+                    'order-no': this.orderByCol != th.key,
+                    'order-asc': this.orderByCol == th.key && this.orderAsc,
+                    'order-desc': this.orderByCol == th.key && !this.orderAsc,
+                };
+            },
+            _clickOrderByTh: function(th) {
+                if (this.orderByCol == th.key) {
+                    this.orderAsc = ! this.orderAsc
+                } else if (_.contains(this.searchableColumns, th.key)) {
+                    this.orderByCol = th.key
+                    this.orderAsc = true
+                }
+            },
+        },
 
     }
 </script>
+
+
+<style scoped>
+    table.table thead tr th.order {
+        position: relative;
+        padding-right: 20px;
+        cursor: pointer;
+    }
+    table.table thead tr th.order-desc:after {
+        opacity: 1;
+        content: "\f0d7";
+    }
+    table.table thead tr th.order-asc:after {
+        opacity: 1;
+        content: "\f0d8";
+    }
+    table.table thead tr th.order.order-no:after {
+        opacity: 0.4;
+        content: "\f0dc";
+    }
+    table.table thead tr th.order:after {
+        font-family: "FontAwesome";
+        font-size: 14px;
+        position: absolute;
+        top: 8px;
+        right: 5px;
+        display: block;
+        box-sizing: border-box;
+    }
+</style>
