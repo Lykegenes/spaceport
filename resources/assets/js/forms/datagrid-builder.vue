@@ -1,27 +1,29 @@
 <template>
-    {{{ pageSize }}}
-    {{{ pageIndex }}}
-    {{{ firstRowIndex }}}
+
     <table :class="tableClass">
         <thead>
             <tr>
-              <th style="width: 10px">#</th>
-              <th style="width: 100px">Task</th>
-              <th style="width: 40px">Label</th>
+              <th v-for="col in columns">{{{ col.name }}}</th>
             </tr>
         </thead>
         <tbody>
-            <tr v-for="line in rows | limitBy pageSize firstRowindex">
+            <tr v-for="line in rows | limitBy pageSize pageFirstRowIndex">
                 <td v-for="r in line">{{{ r.value }}}</td>
             </tr>
         </tbody>
     </table>
 
-    <ul v-if="pagingItems" class="pagination pagination-sm no-margin pull-right">
-        <li :class="{ disabled: pageIndex == 0 }"><a @click="pageIndex = 0">«</a></li>
-        <li v-for="i in pagingItems" :class="{ active: pageIndex == i.val }"><a @click="pageIndex = i.val">{{ i.name }}</a></li>
-        <li :class="{ disabled: pageIndex == lastPage }"><a @click="pageIndex = lastPage">»</a></li>
+    <div class="pull-left">
+        <span>Showing {{{ pageFirstRowIndex }}} to {{{ pageLastRowIndex }}} of {{{ rows.length }}} rows.</span>
+        <span>{{{ pageSize }}} records per page.</span>
+    </div>
+
+    <ul v-if="pageLinks" class="pagination pagination-sm no-margin pull-right">
+        <li :class="{ disabled: pageIndex == 0 }"><a @click="pageIndex = 0">&laquo;</a></li>
+        <li v-for="i in pageLinks" :class="{ active: pageIndex == i }"><a @click="pageIndex = i">{{ i + 1 }}</a></li>
+        <li :class="{ disabled: pageIndex == lastPage }"><a @click="pageIndex = lastPage">&raquo;</a></li>
     </ul>
+
 </template>
 
 <script>
@@ -39,16 +41,22 @@
                 type: Number,
                 default: 0
             },
+            pageLinksNumber: {
+                type: Number,
+                default: 2
+            },
             orderBy: {
                 type: Number,
                 default: 0
             },
             orderAsc: {
+                type: Boolean,
                 default: false
             },
-            wrapLines: {
+            /*wrapLines: {
+                type: Boolean,
                 default: false
-            },
+            },*/
             striped: {
                 type: Boolean,
                 default: true
@@ -69,17 +77,45 @@
 
         data () {
             return {
+                columns: [
+                    {key: 'id', name: 'Id'},
+                    {key: 'task', name: 'Task'},
+                    {key: 'label', name: 'Label'},
+                ],
                 rows: [
                     [ {key: "id", value: 1}, {key: "task", value: "Update software"}, {key: "label", value: 55} ],
                     [ {key: "id", value: 2}, {key: "task", value: "Clean Database"}, {key: "label", value: 70} ],
                     [ {key: "id", value: 3}, {key: "task", value: "Cron job running"}, {key: "label", value: 30} ],
                     [ {key: "id", value: 4}, {key: "task", value: "Fix and squish bugs"}, {key: "label", value: 90} ],
+                    [ {key: "id", value: 1}, {key: "task", value: "Update software"}, {key: "label", value: 55} ],
+                    [ {key: "id", value: 2}, {key: "task", value: "Clean Database"}, {key: "label", value: 70} ],
+                    [ {key: "id", value: 3}, {key: "task", value: "Cron job running"}, {key: "label", value: 30} ],
+                    [ {key: "id", value: 4}, {key: "task", value: "Fix and squish bugs"}, {key: "label", value: 90} ],
+                    [ {key: "id", value: 1}, {key: "task", value: "Update software"}, {key: "label", value: 55} ],
+                    [ {key: "id", value: 2}, {key: "task", value: "Clean Database"}, {key: "label", value: 70} ],
+                    [ {key: "id", value: 3}, {key: "task", value: "Cron job running"}, {key: "label", value: 30} ],
+                    [ {key: "id", value: 4}, {key: "task", value: "Fix and squish bugs"}, {key: "label", value: 90} ],
+                    [ {key: "id", value: 1}, {key: "task", value: "Update software"}, {key: "label", value: 55} ],
+                    [ {key: "id", value: 2}, {key: "task", value: "Clean Database"}, {key: "label", value: 70} ],
+                    [ {key: "id", value: 3}, {key: "task", value: "Cron job running"}, {key: "label", value: 30} ],
+                    [ {key: "id", value: 4}, {key: "task", value: "Fix and squish bugs"}, {key: "label", value: 90} ],
+                    [ {key: "id", value: 1}, {key: "task", value: "Update software"}, {key: "label", value: 55} ],
+                    [ {key: "id", value: 2}, {key: "task", value: "Clean Database"}, {key: "label", value: 70} ],
+                    [ {key: "id", value: 3}, {key: "task", value: "Cron job running"}, {key: "label", value: 30} ],
+                    [ {key: "id", value: 4}, {key: "task", value: "Fix and squish bugs"}, {key: "label", value: 90} ],
+                    [ {key: "id", value: 1}, {key: "task", value: "Update software"}, {key: "label", value: 55} ],
+                    [ {key: "id", value: 2}, {key: "task", value: "Clean Database"}, {key: "label", value: 70} ],
+                    [ {key: "id", value: 3}, {key: "task", value: "Cron job running"}, {key: "label", value: 30} ],
+                    [ {key: "id", value: 4}, {key: "task", value: "Fix and squish bugs"}, {key: "label", value: 90} ],
+                    [ {key: "id", value: 1}, {key: "task", value: "Update software"}, {key: "label", value: 55} ],
+                    [ {key: "id", value: 2}, {key: "task", value: "Clean Database"}, {key: "label", value: 70} ],
+                    [ {key: "id", value: 3}, {key: "task", value: "Cron job running"}, {key: "label", value: 30} ],
                 ],
             }
         },
 
         ready () {
-            this.model = this.rows;
+            //
         },
 
         computed: {
@@ -92,41 +128,30 @@
                     'table-condensed': this.condensed,
                 };
             },
-            firstRowIndex: function () {
+            pageFirstRowIndex: function () {
                 return this.pageSize * this.pageIndex;
             },
-            lastPage: function () {
-                if (!this.pageSize) {
-                    return 0;
-                }
-                if (!this.model.length) {
-                    return 0;
-                }
-                return Math.floor((this.model.length - 1) / this.pageSize);
+            pageLastRowIndex: function () {
+                return Math.min(this.pageFirstRowIndex + this.pageSize, this.rows.length);
             },
-            pagingItems: function () {
-                if (!this.pageSize) {
-                    return null;
+            lastPage: function () {
+                if (this.pageSize == 0 || this.rows.length == 0) {
+                    return 0;
                 }
-                if (!this.model.length) {
-                    return null;
-                }
-                var borders = 2;
-                var min = Math.max(this.pageIndex - borders, 0);
-                var max = Math.min(min + 2 * borders, this.lastPage);
-                min = Math.max(max - 2 * borders, 0);
-                if (min == max) {
-                    return null;
-                }
-                var result = [];
-                for (var i = min; i <= max; ++i)
-                    result.push({
-                        name: i + 1,
-                        val: i
-                    });
-                return result;
-            }
+                return Math.floor((this.rows.length - 1) / this.pageSize);
+            },
+            pageLinks: function () {
+                var start = Math.max(this.pageIndex - this.pageLinksNumber, 0)
+                var end = Math.min(this.pageIndex + this.pageLinksNumber, this.lastPage)
+                return _.range(start, end + 1, 1);
+            },
         },
+
+        methods: {
+            sortFunc: function () {
+
+            }
+        }
 
     }
 </script>
