@@ -1,36 +1,58 @@
 <template>
+    <div class="box box-primary">
 
-    <div class="pull-right">
-        <input class="form-control pull-right" placeholder="Search" type="text" v-model="searchQuery">
+        <div class="box-header with-border">
+            <h3 class="box-title">{{ title }}</h3>
+            <div class="box-tools">
+                <div class="actions">
+                    <div class="btn-group btn-group-sm">
+                        <button type="button" class="btn btn-default"><i class="fa fa-refresh"></i></button>
+                    </div>
+                </div>
+                <div class="search">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                        <input class="form-control" placeholder="Search" type="text" v-model="searchQuery">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="box-body table-responsive no-padding">
+            <table :class="tableClass">
+
+                <thead>
+                    <tr>
+                      <th v-for="h in headers" :class="this._orderClass(h)" @click="this._clickOrderByTh(h)">{{ h.name }}</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr v-for="line in filteredRows
+                                | orderBy orderByCol orderAscForFilter
+                                | limitBy pageSize pageFirstRowIndex">
+
+                        <td v-for="value in line">{{ value }}</td>
+
+                    </tr>
+                </tbody>
+
+            </table>
+        </div>
+
+        <div class="box-footer clearfix">
+            <div v-if="pageLinks" class="pull-left">
+                <span>Showing {{ pageFirstRowIndex }} to {{ pageLastRowIndex }} of {{ filteredRows.length }} rows.</span>
+                <span>{{ pageSize }} records per page.</span>
+            </div>
+
+            <ul v-if="pageLinks" class="pagination pagination-sm no-margin pull-right">
+                <li :class="{ disabled: pageIndex == 0 }"><a @click="pageIndex = 0">&laquo;</a></li>
+                <li v-for="i in pageLinks" :class="{ active: pageIndex == i }"><a @click="pageIndex = i">{{ i + 1 }}</a></li>
+                <li :class="{ disabled: pageIndex == lastPage }"><a @click="pageIndex = lastPage">&raquo;</a></li>
+            </ul>
+        </div>
     </div>
-
-    <table :class="tableClass">
-        <thead>
-            <tr>
-              <th v-for="h in headers" :class="this._orderClass(h)" @click="this._clickOrderByTh(h)">{{{ h.name }}}</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr v-for="line in filteredRows
-                        | orderBy orderByCol orderAscForFilter
-                        | limitBy pageSize pageFirstRowIndex">
-
-                <td v-for="value in line">{{{ value }}}</td>
-
-            </tr>
-        </tbody>
-    </table>
-
-    <div v-if="pageLinks" class="pull-left">
-        <span>Showing {{{ pageFirstRowIndex }}} to {{{ pageLastRowIndex }}} of {{{ filteredRows.length }}} rows.</span>
-        <span>{{{ pageSize }}} records per page.</span>
-    </div>
-
-    <ul v-if="pageLinks" class="pagination pagination-sm no-margin pull-right">
-        <li :class="{ disabled: pageIndex == 0 }"><a @click="pageIndex = 0">&laquo;</a></li>
-        <li v-for="i in pageLinks" :class="{ active: pageIndex == i }"><a @click="pageIndex = i">{{ i + 1 }}</a></li>
-        <li :class="{ disabled: pageIndex == lastPage }"><a @click="pageIndex = lastPage">&raquo;</a></li>
-    </ul>
 
 </template>
 
@@ -40,7 +62,9 @@
         mixins: [Spaceport.ColumnTypesMixin],
 
         props: {
-            model: Array,
+            columns: Array,
+            listData: Array,
+            title: String,
             pageSize: {
                 type: Number,
                 default: 10
@@ -65,10 +89,6 @@
                 type: String,
                 default: null
             },
-            /*wrapLines: {
-                type: Boolean,
-                default: false
-            },*/
             striped: {
                 type: Boolean,
                 default: true
@@ -227,5 +247,16 @@
         right: 5px;
         display: block;
         box-sizing: border-box;
+    }
+
+    .box .box-tools .search {
+        display: inline-block;
+        margin-left: 20px;
+        width: 200px;
+    }
+    .box .box-tools .actions {
+        display: inline-block;
+        margin-left: 20px;
+        vertical-align: top;
     }
 </style>
