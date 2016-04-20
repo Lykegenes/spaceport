@@ -14,7 +14,7 @@ window.SpaceportDatagridColumns = function (data) {
             }
         })
 
-        // We must extend a new Object to trigger Vue.js reactivity
+        // We must extend a new Object to trigger Vue.js reactivity.
         this.columns = _.extend({}, this.columns, obj)
     };
 

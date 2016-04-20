@@ -27,6 +27,7 @@ class ListDataRepository
         //dd($rules);
 
         $input = [
+            'text field' => 'some thing',
             'text area' => 'something',
             'integer' => 10,
             'date' => '03/30/2016',
@@ -41,7 +42,7 @@ class ListDataRepository
         $columns = $liste->columns;
         $rules = [];
 
-        foreach($columns as $column) {
+        foreach ($columns as $column) {
             $rules = array_merge($rules, ColumnTypesFactory::make($column)->compileRules());
         }
 
