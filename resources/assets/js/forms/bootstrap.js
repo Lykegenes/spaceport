@@ -17,3 +17,7 @@ _.extend(Spaceport, require('./http'));
  * Load Spaceport Form components
  */
 require('./components')
+
+
+// remove this
+require('./../datagrid/DatagridColumn')

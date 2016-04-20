@@ -1,7 +1,5 @@
 <template>
 
-    <spaceport-loading></spaceport-loading>
-
     <datagrid-builder></datagrid-builder>
 
 </template>

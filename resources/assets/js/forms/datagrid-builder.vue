@@ -1,12 +1,16 @@
 <template>
     <div class="box box-primary">
 
+        <div v-show="loading" class="overlay">
+            <spaceport-loading></spaceport-loading>
+        </div>
+
         <div class="box-header with-border">
             <h3 class="box-title">{{ title }}</h3>
             <div class="box-tools">
                 <div class="actions">
                     <div class="btn-group btn-group-sm">
-                        <button type="button" class="btn btn-default"><i class="fa fa-refresh"></i></button>
+                        <button @click='_refreshData()' type="button" class="btn btn-default"><i class="fa fa-refresh"></i></button>
                     </div>
                 </div>
                 <div class="search">
@@ -109,6 +113,8 @@
 
         data () {
             return {
+                loading: false,
+                datagridColumns: new SpaceportDatagridColumns(),
                 headers: [
                     {key: 'id', name: 'Id'},
                     {key: 'task', name: 'Task'},
@@ -159,7 +165,9 @@
         },
 
         ready () {
-            //
+            this.datagridColumns.initColumnsFromViewColumns(this.headers)
+
+            this.$log('datagridColumns')
         },
 
         computed: {
@@ -207,13 +215,19 @@
                     'order-desc': this.orderByCol == th.key && !this.orderAsc,
                 };
             },
-            _clickOrderByTh: function(th) {
+            _clickOrderByTh: function (th) {
                 if (this.orderByCol == th.key) {
                     this.orderAsc = ! this.orderAsc
                 } else if (_.contains(this.searchableColumns, th.key)) {
                     this.orderByCol = th.key
                     this.orderAsc = true
                 }
+            },
+            _refreshData: function () {
+                this.loading = true;
+
+                var self = this
+                _.delay(function () { self.loading = false }, 1000);
             },
         },
 
@@ -258,5 +272,13 @@
         display: inline-block;
         margin-left: 20px;
         vertical-align: top;
+    }
+
+    .box .overlay > .v-spinner {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-left: -28px;
+      margin-top: -28px;
     }
 </style>
