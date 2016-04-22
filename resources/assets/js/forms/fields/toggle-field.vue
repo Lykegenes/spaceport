@@ -1,0 +1,26 @@
+<template>
+    <div class="form-group" :class="{'has-error': form.errors.has(name)}">
+        <label class="col-sm-2 control-label">{{ display }}</label>
+        <div class="col-sm-10">
+            <div class="toggle" v-for="item in items">
+                <label>
+                    <input type="checkbox" :name="item.name" :value="item.value" v-model="input">
+                    <span><small></small></span>
+                    <span>{{ item.text }}</span>
+                </label>
+            </div>
+
+            <span class="help-block" v-show="form.errors.has(name)">
+                <strong>{{ form.errors.get(name) }}</strong>
+            </span>
+        </div>
+    </div>
+</template>
+
+<script>
+    module.exports = {
+
+        props: ['display', 'form', 'name', 'items', 'input'],
+
+    }
+</script>

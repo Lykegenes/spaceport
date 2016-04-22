@@ -12,5 +12,8 @@ $fa-font-path: "../fonts";
 //@import "node_modules/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.scss";
 @import "./checkbox.scss";
 
+// A checkbox style as a boolean switch
+@import "./toggle.scss";
+
 // Select2
 @import "node_modules/select2/src/scss/core"

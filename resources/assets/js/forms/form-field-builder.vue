@@ -42,6 +42,13 @@
                     :items="[{text: 'one', value: 1}, {text: 'two', value: 2}]"
                     :input.sync="input">
         </checkbox-field>
+        <toggle-field v-if="type == ColumnTypes.COL_BOOLEAN"
+                    :display="display"
+                    :form="form"
+                    :name="name"
+                    :items="[{text: 'Confirm?', value: 1}]"
+                    :input.sync="input">
+        </toggle-field>
         <select-field v-if="type == ColumnTypes.COL_SELECT"
                     :display="display"
                     :form="form"
