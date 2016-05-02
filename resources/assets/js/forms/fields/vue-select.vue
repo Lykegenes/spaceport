@@ -27,8 +27,6 @@
     display: block;
     padding: 0;
     background: none;
-    border: 1px solid rgba(60,60,60,.26);
-    border-radius: 4px;
     white-space: normal;
   }
   .searchable .dropdown-toggle {
@@ -106,7 +104,7 @@
 
 <template>
   <div class="dropdown" :class="dropdownClasses">
-    <div v-el:toggle @mousedown.prevent="toggleDropdown" class="dropdown-toggle clearfix" type="button">
+    <div v-el:toggle @mousedown.prevent="toggleDropdown" class="form-control dropdown-toggle clearfix" type="button">
         <span class="form-control" v-if="!searchable && isSelectedEmpty">
             {{ placeholder }}
         </span>
