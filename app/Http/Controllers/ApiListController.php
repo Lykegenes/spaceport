@@ -60,7 +60,12 @@ class ApiListController extends Controller
             'type' => 'required',
         ]);
 
-        $column = ListRepository::addColumn($list, $request->all());
+        $data = [
+            'title' => $request->input('title'),
+            'type' => $request->input('type.value'),
+        ];
+
+        $column = ListRepository::addColumn($list, $data);
 
         return $column->toJson();
     }
