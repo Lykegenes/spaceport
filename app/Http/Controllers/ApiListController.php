@@ -2,7 +2,9 @@
 
 namespace Spaceport\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Spaceport\Http\Requests\CreateListRequest;
+use Spaceport\Http\Requests\UpdateListRequest;
+use Spaceport\Http\Requests\CreateColumnRequest;
 use Spaceport\Repositories\ListRepository;
 
 class ApiListController extends Controller
@@ -17,24 +19,16 @@ class ApiListController extends Controller
         return ListRepository::getById($listId)->toJson();
     }
 
-    public function create(Request $request)
+    public function create(CreateListRequest $request)
     {
-        $this->validate($request, [
-            'title' => 'required|min:3|max:255',
-        ]);
-
-        $list = ListRepository::create($request->all());
+        $list = ListRepository::create($request->getCleanData());
 
         return $list->toJson();
     }
 
-    public function update(Request $request, $listId)
+    public function update(UpdateListRequest $request, $listId)
     {
-        $this->validate($request, [
-            'title' => 'required|min:3|max:255',
-        ]);
-
-        $list = ListRepository::update($listId, $request->all());
+        $list = ListRepository::update($listId, $request->getCleanData());
 
         return $list->toJson();
     }
@@ -51,21 +45,11 @@ class ApiListController extends Controller
         return $list->columns->toJson();
     }
 
-    public function addColumn(Request $request, $listId)
+    public function addColumn(CreateColumnRequest $request, $listId)
     {
         $list = ListRepository::getById($listId);
 
-        $this->validate($request, [
-            'title' => 'required|min:3|max:255',
-            'type' => 'required',
-        ]);
-
-        $data = [
-            'title' => $request->input('title'),
-            'type' => $request->input('type.value'),
-        ];
-
-        $column = ListRepository::addColumn($list, $data);
+        $column = ListRepository::addColumn($list, $request->getCleanData());
 
         return $column->toJson();
     }

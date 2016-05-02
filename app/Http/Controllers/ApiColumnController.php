@@ -2,7 +2,7 @@
 
 namespace Spaceport\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Spaceport\Http\Requests\UpdateColumnRequest;
 use Spaceport\ColumnTypes\ColumnTypesConstants;
 use Spaceport\Repositories\ColumnRepository;
 
@@ -26,14 +26,9 @@ class ApiColumnController extends Controller
         ];
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdateColumnRequest $request, $id)
     {
-        $this->validate($request, [
-            'title' => 'required|min:3|max:255',
-            'type' => 'required',
-        ]);
-
-        $column = ColumnRepository::update($id, $request->all());
+        $column = ColumnRepository::update($id, $request->getCleanData());
 
         return $column->toJson();
     }
