@@ -3,7 +3,7 @@
     <div class="box-header with-border">
         <h3 class="box-title">Create a column</h3>
     </div>
-    <form role="form" class="form-horizontal">
+    <form role="form" class="form-horizontal" @keydown.enter.stop.prevent="">
         <div class="box-body">
             <text-field :display="'Title'"
                         :form="forms.createColumn"

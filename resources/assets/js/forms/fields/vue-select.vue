@@ -109,7 +109,7 @@
             {{ placeholder }}
         </span>
 
-        <span class="selected-tag" v-for="option in selectedOptionsAsArray | orderBy labelKey">
+        <span class="selected-tag" v-for="option in selectedOptionsAsArray">
             {{ getOptionLabel(option) }}
             <button v-if="multiple" @click="select(option)" type="button" class="close">
                 <span aria-hidden="true">&times;</span>
@@ -124,7 +124,7 @@
           @keyup.esc="onEscape"
           @keyup.up.prevent="typeAheadUp"
           @keyup.down.prevent="typeAheadDown"
-          @keyup.enter.stop.prevent="typeAheadSelect"
+          @keyup.enter.prevent="typeAheadSelect"
           @blur="open = false"
           @focus="open = true"
           type="search"
@@ -249,9 +249,12 @@
                 }
             },
 
+            orderedOptions() {
+                return this.$options.filters.orderBy(this.options, this.labelKey)
+            },
+
             filteredOptions() {
-                var filtered = this.$options.filters.filterBy(this.options, this.search, this.labelKey)
-                return this.$options.filters.orderBy(filtered, this.labelKey)
+                return this.$options.filters.filterBy(this.orderedOptions, this.search, this.labelKey)
             },
 
             selectedOptionsAsArray() {
@@ -264,7 +267,7 @@
                 }
 
                 var self = this
-                return _.filter(this.options, function (option) {
+                return _.filter(this.orderedOptions, function (option) {
                     return _.contains(self.selectedAsArray, self.getOptionValue(option))
                 });
             },
