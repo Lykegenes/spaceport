@@ -17,7 +17,8 @@ elixir(function(mix) {
 
     // All Spaceport vendors CSS.
     mix.sass('vendor.scss', 'public/dist/css/vendor.css')
-        .copy('node_modules/font-awesome/fonts', 'public/dist/fonts');
+        .copy('node_modules/font-awesome/fonts', 'public/dist/fonts')
+        .copy('node_modules/bootstrap-sass/assets/fonts/bootstrap', 'public/dist/fonts');
 
     // Exclude vendors from Spaceport.js
     elixir.config.js.browserify.externals.push('vue', 'vue-resource', 'vue-router','vue-hot-reload-api', 'underscore');

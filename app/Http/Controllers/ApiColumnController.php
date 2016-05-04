@@ -2,7 +2,7 @@
 
 namespace Spaceport\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Spaceport\Http\Requests\UpdateColumnRequest;
 use Spaceport\ColumnTypes\ColumnTypesConstants;
 use Spaceport\Repositories\ColumnRepository;
 
@@ -16,25 +16,19 @@ class ApiColumnController extends Controller
     public function getColumnTypes()
     {
         return [
-            ['text' => 'Text Field', 'value' => ColumnTypesConstants::COL_TEXT_FIELD],
-            ['text' => 'Text Area', 'value' => ColumnTypesConstants::COL_TEXT_AREA],
-            ['text' => 'Integer', 'value' => ColumnTypesConstants::COL_INTEGER],
-            ['text' => 'Date', 'value' => ColumnTypesConstants::COL_DATE],
-            ['text' => 'Radio', 'value' => ColumnTypesConstants::COL_RADIO],
-            ['text' => 'Checkbox', 'value' => ColumnTypesConstants::COL_CHECKBOX],
-            ['text' => 'Toggle', 'value' => ColumnTypesConstants::COL_BOOLEAN],
-            ['text' => 'Select', 'value' => ColumnTypesConstants::COL_SELECT],
+            ['label' => 'Text Field', 'value' => ColumnTypesConstants::COL_TEXT_FIELD],
+            ['label' => 'Text Area', 'value' => ColumnTypesConstants::COL_TEXT_AREA],
+            ['label' => 'Integer', 'value' => ColumnTypesConstants::COL_INTEGER],
+            ['label' => 'Date', 'value' => ColumnTypesConstants::COL_DATE],
+            ['label' => 'Radio', 'value' => ColumnTypesConstants::COL_RADIO],
+            ['label' => 'Checkbox', 'value' => ColumnTypesConstants::COL_CHECKBOX],
+            ['label' => 'Select', 'value' => ColumnTypesConstants::COL_SELECT],
         ];
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdateColumnRequest $request, $id)
     {
-        $this->validate($request, [
-            'title' => 'required|min:3|max:255',
-            'type' => 'required',
-        ]);
-
-        $column = ColumnRepository::update($id, $request->all());
+        $column = ColumnRepository::update($id, $request->getCleanData());
 
         return $column->toJson();
     }

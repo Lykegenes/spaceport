@@ -10,7 +10,18 @@
             <div class="box-tools">
                 <div class="actions">
                     <div class="btn-group btn-group-sm">
-                        <button @click='_refreshData()' type="button" class="btn btn-default"><i class="fa fa-refresh"></i></button>
+
+                        <button @click='_onClickRefreshData()' type="button" class="btn btn-default"><i class="fa fa-refresh"></i></button>
+
+                        <div class="btn-group btn-group-sm">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                {{ pageSize }}&ensp;<span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                              <li v-for="size in pageSizeChoices" v-if="size != pageSize"><a @click="pageSize = size">{{ size }}</a></li>
+                            </ul>
+                        </div>
+
                     </div>
                 </div>
                 <div class="search">
@@ -23,21 +34,17 @@
         </div>
 
         <div class="box-body table-responsive no-padding">
-            <table :class="tableClass">
+            <table :class="tableClasses">
 
                 <thead>
                     <tr>
-                      <th v-for="h in headers" :class="this._orderClass(h)" @click="this._clickOrderByTh(h)">{{ h.name }}</th>
+                      <th v-for="h in headers" :class="this._orderClasses(h)" @click="_onClickOrderByTh(h)">{{ h.name }}</th>
                     </tr>
                 </thead>
 
                 <tbody>
-                    <tr v-for="line in filteredRows
-                                | orderBy orderByCol orderAscForFilter
-                                | limitBy pageSize pageFirstRowIndex">
-
-                        <td v-for="value in line">{{ value }}</td>
-
+                    <tr v-for="row in paginatedRows">
+                        <td v-for="value in row">{{ value }}</td>
                     </tr>
                 </tbody>
 
@@ -68,10 +75,17 @@
         props: {
             columns: Array,
             listData: Array,
-            title: String,
+            title: {
+                type: String,
+                default: ''
+            },
             pageSize: {
                 type: Number,
                 default: 10
+            },
+            pageSizeChoices: {
+                type: Array,
+                default: [10, 25, 50]
             },
             pageIndex: {
                 type: Number,
@@ -111,7 +125,7 @@
             },
         },
 
-        data () {
+        data() {
             return {
                 loading: false,
                 datagridColumns: new SpaceportDatagridColumns(),
@@ -164,14 +178,19 @@
             }
         },
 
-        ready () {
+        ready() {
             this.datagridColumns.initColumnsFromViewColumns(this.headers)
+        },
 
-            this.$log('datagridColumns')
+        watch: {
+            lastPage(val) {
+                if (this.pageIndex > val) this.pageIndex = val
+                if (! this.pageIndex >= 0) this.pageIndex = 0
+            },
         },
 
         computed: {
-            tableClass: function () {
+            tableClasses() {
                 return {
                     'table': true,
                     'table-striped': this.striped,
@@ -180,34 +199,47 @@
                     'table-condensed': this.condensed,
                 };
             },
-            pageFirstRowIndex: function () {
+
+            pageFirstRowIndex() {
                 return this.pageSize * this.pageIndex;
             },
-            pageLastRowIndex: function () {
+
+            pageLastRowIndex() {
                 return Math.min(this.pageFirstRowIndex + this.pageSize, this.filteredRows.length);
             },
-            lastPage: function () {
+
+            lastPage() {
                 if (this.pageSize == 0 || this.rows.length == 0) {
                     return 0;
                 }
                 return Math.floor((this.filteredRows.length - 1) / this.pageSize);
             },
-            pageLinks: function () {
+
+            pageLinks() {
                 var start = Math.max(this.pageIndex - this.pageLinksNumber, 0)
                 var end = Math.min(this.pageIndex + this.pageLinksNumber, this.lastPage)
                 return _.range(start, end + 1, 1);
             },
-            orderAscForFilter: function () {
+
+            orderAscForFilter() {
                 return this.orderAsc ? 1 : -1
             },
-            filteredRows: function () {
-                var filter = Vue.filter('filterBy')
-                return filter(this.rows, this.searchQuery, this.searchableColumns)
+
+            orderedRows() {
+                return this.$options.filters.orderBy(this.rows, this.orderByCol, this.orderAscForFilter)
+            },
+
+            filteredRows() {
+                return this.$options.filters.filterBy(this.orderedRows, this.searchQuery, this.searchableColumns)
+            },
+
+            paginatedRows() {
+                return this.$options.filters.limitBy(this.filteredRows, this.pageSize, this.pageFirstRowIndex)
             },
         },
 
         methods: {
-            _orderClass: function (th) {
+            _orderClasses(th) {
                 return {
                     'order': _.contains(this.searchableColumns, th.key),
                     'order-no': this.orderByCol != th.key,
@@ -215,7 +247,8 @@
                     'order-desc': this.orderByCol == th.key && !this.orderAsc,
                 };
             },
-            _clickOrderByTh: function (th) {
+
+            _onClickOrderByTh(th) {
                 if (this.orderByCol == th.key) {
                     this.orderAsc = ! this.orderAsc
                 } else if (_.contains(this.searchableColumns, th.key)) {
@@ -223,7 +256,8 @@
                     this.orderAsc = true
                 }
             },
-            _refreshData: function () {
+
+            _onClickRefreshData() {
                 this.loading = true;
 
                 var self = this

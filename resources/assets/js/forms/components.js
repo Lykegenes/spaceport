@@ -8,6 +8,8 @@ Vue.component('radio-field', require('./fields/radio-field.vue'))
 Vue.component('checkbox-field', require('./fields/checkbox-field.vue'))
 Vue.component('toggle-field', require('./fields/toggle-field.vue'))
 
+Vue.component('vue-select', require('./fields/vue-select.vue'))
+
 // Load the Spaceport Form Field Builder component
 Vue.component('form-field-builder', require('./form-field-builder.vue'))
 
