@@ -10,7 +10,18 @@
             <div class="box-tools">
                 <div class="actions">
                     <div class="btn-group btn-group-sm">
+
                         <button @click='_onClickRefreshData()' type="button" class="btn btn-default"><i class="fa fa-refresh"></i></button>
+
+                        <div class="btn-group btn-group-sm">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                {{ pageSize }}&ensp;<span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                              <li v-for="size in pageSizeChoices" v-if="size != pageSize"><a @click="pageSize = size">{{ size }}</a></li>
+                            </ul>
+                        </div>
+
                     </div>
                 </div>
                 <div class="search">
@@ -27,15 +38,13 @@
 
                 <thead>
                     <tr>
-                      <th v-for="h in headers" :class="this._orderClasses(h)" @click="this._onClickOrderByTh(h)">{{ h.name }}</th>
+                      <th v-for="h in headers" :class="this._orderClasses(h)" @click="_onClickOrderByTh(h)">{{ h.name }}</th>
                     </tr>
                 </thead>
 
                 <tbody>
                     <tr v-for="row in paginatedRows">
-
                         <td v-for="value in row">{{ value }}</td>
-
                     </tr>
                 </tbody>
 
@@ -73,6 +82,10 @@
             pageSize: {
                 type: Number,
                 default: 10
+            },
+            pageSizeChoices: {
+                type: Array,
+                default: [10, 25, 50]
             },
             pageIndex: {
                 type: Number,
