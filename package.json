@@ -1,15 +1,15 @@
 {
   "private": true,
   "devDependencies": {
-    "gulp": "^3.8.8"
+    "gulp": "^3.8.8",
+    "laravel-elixir": "^6.0.0-1",
+    "laravel-elixir-vueify": "~1.0"
   },
   "dependencies": {
     "bootstrap-datepicker": "~1.6",
     "bootstrap-sass": "~3.3",
     "font-awesome": "~4.6",
     "jquery": "~2.2",
-    "laravel-elixir": "^6.0.0-1",
-    "laravel-elixir-vueify": "~1.0",
     "underscore": "~1.8",
     "vue": "~1.0",
     "vue-resource": "~0.7",
