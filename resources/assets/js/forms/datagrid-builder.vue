@@ -13,12 +13,12 @@
 
                         <button @click='_onClickRefreshData()' type="button" class="btn btn-default"><i class="fa fa-refresh"></i></button>
 
-                        <div class="btn-group btn-group-sm">
+                        <div v-if="pageSizeChoices" class="btn-group btn-group-sm">
                             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                                 {{ pageSize }}&ensp;<span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu">
-                              <li v-for="size in pageSizeChoices" v-if="size != pageSize"><a @click="pageSize = size">{{ size }}</a></li>
+                              <li v-for="size in pageSizeChoices" v-if="_isValidPageSize(size)"><a @click="pageSize = size">{{ size }}</a></li>
                             </ul>
                         </div>
 
@@ -85,7 +85,7 @@
             },
             pageSizeChoices: {
                 type: Array,
-                default: [10, 25, 50]
+                default() { return [10, 25, 50] }
             },
             pageIndex: {
                 type: Number,
@@ -225,6 +225,18 @@
                 return this.orderAsc ? 1 : -1
             },
 
+            computedSearchableColummns() {
+                return this.columns.filterBy(function (col) {
+                    return col.searchable === true
+                })
+            },
+
+            computedSortableColumns() {
+                return this.columns.filterBy(function (col) {
+                    return col.sortable === true
+                })
+            },
+
             orderedRows() {
                 return this.$options.filters.orderBy(this.rows, this.orderByCol, this.orderAscForFilter)
             },
@@ -263,6 +275,10 @@
                 var self = this
                 _.delay(function () { self.loading = false }, 1000);
             },
+
+            _isValidPageSize(size) {
+                return size != this.pageSize
+            }
         },
 
     }
