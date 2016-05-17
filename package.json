@@ -3,7 +3,11 @@
   "devDependencies": {
     "gulp": "^3.8.8",
     "laravel-elixir": "^6.0.0-1",
-    "laravel-elixir-vueify": "~1.0"
+    "laravel-elixir-rollup": "^0.3.3",
+    "laravel-elixir-vueify": "~1.0",
+    "laravel-elixir-webpack": "^1.0.1",
+    "rollup-plugin-commonjs": "^2.2.1",
+    "rollup-plugin-node-resolve": "^1.5.0"
   },
   "dependencies": {
     "bootstrap-datepicker": "~1.6",

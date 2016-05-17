@@ -1,5 +1,9 @@
 var elixir = require('laravel-elixir');
 require('laravel-elixir-vueify');
+require('laravel-elixir-webpack');
+require('laravel-elixir-rollup');
+var nodeResolve = require('rollup-plugin-node-resolve');
+var commonjs = require('rollup-plugin-commonjs');
 require('./elixir-vendor');
 
 /*
@@ -24,8 +28,21 @@ elixir(function(mix) {
     elixir.config.js.browserify.externals.push('vue', 'vue-resource', 'vue-router','vue-hot-reload-api', 'underscore');
 
     // Compile the external vendors in their own file
-    mix.vendor('core/vendor.js', 'public/dist/js/vendor.js');
+    //mix.vendor('core/vendor.js', 'public/dist/js/vendor.js');
+    //mix.webpack('core/vendor.js', {}, 'public/dist/js/vendor-webpack.js');
+    mix.rollup('core/vendor.js', 'public/dist/js/vendor-rollup.js', {
+        format: 'iife',
+        plugins: [
+            nodeResolve({
+      jsnext: true,
+      main: true
+  }),
+            commonjs({
+                include: 'node_modules/**',
+            }),
+        ],
+    });
 
     // Compile the Spaceport Vue application
-    mix.browserify('spaceport.js', 'public/dist/js/spaceport.js');
+    mix.browserify('spaceport.js', 'public/dist/js/spaceport.js', null, {paths: ['./node_modules', './resources/assets/js']});
 });
