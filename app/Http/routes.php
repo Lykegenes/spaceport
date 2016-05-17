@@ -12,6 +12,7 @@
 */
 
 Route::get('/', function () {
+    return redirect('settings');
     return view('home');
 });
 
@@ -29,7 +30,7 @@ Route::get('/', function () {
 Route::group(['middleware' => ['web']], function ($router) {
 
     // Lists views
-    $router->get('/settings', 'SettingsController@index');
+    $router->get('/settings', 'SettingsController@index')->name('settings');
 
 });
 

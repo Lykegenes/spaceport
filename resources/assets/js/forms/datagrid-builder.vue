@@ -68,7 +68,9 @@
 </template>
 
 <script>
-    module.exports = {
+    import SpaceportDatagridColumns from 'datagrid/DatagridColumn.js'
+
+    export default {
 
         mixins: [Spaceport.ColumnTypesMixin],
 
