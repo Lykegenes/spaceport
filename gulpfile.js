@@ -27,5 +27,7 @@ elixir(function(mix) {
     mix.vendor('core/vendor.js', 'public/dist/js/vendor.js');
 
     // Compile the Spaceport Vue application
-    mix.browserify('spaceport.js', 'public/dist/js/spaceport.js');
+    mix.browserify('spaceport.js', 'public/dist/js/spaceport.js', null, {
+        paths: ['./node_modules', './resources/assets/js']
+    });
 });
