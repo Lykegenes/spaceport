@@ -21,7 +21,7 @@ cache:
     - $HOME/.composer/cache
 
 before_install:
-  - node -V
+  - node -v
 
 install:
   - composer update --prefer-dist
