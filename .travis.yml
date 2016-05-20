@@ -7,6 +7,9 @@ php:
   - 7.0
   - hhvm
 
+services:
+  - mysql
+
 env:
   global:
     - setup=basic
@@ -32,6 +35,7 @@ install:
 before_script:
   - cp .env.travis .env
   - gulp --production
+  - mysql -e 'create database spaceport;'
 
 script:
   - vendor/bin/phpunit
