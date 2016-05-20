@@ -13,7 +13,6 @@ env:
     - COMPOSER_DISCARD_CHANGES=true
     - COMPOSER_NO_INTERACTION=1
     - COMPOSER_DISABLE_XDEBUG_WARN=1
-    - TRAVIS_NODE_VERSION="5"
 
 cache:
   directories:
@@ -21,6 +20,8 @@ cache:
     - $HOME/.composer/cache
 
 before_install:
+  - nvm install 5.0
+  - nvm run 5.0 --version
   - node -v
 
 install:
