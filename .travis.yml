@@ -16,13 +16,11 @@ env:
 
 cache:
   directories:
-    - vendor
     - $HOME/.composer/cache
+    - $HOME/.npm
 
 before_install:
-  - nvm install 5.0
-  - nvm run 5.0 --version
-  - node -v
+  - nvm install node
 
 install:
   - composer update --prefer-dist
