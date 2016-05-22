@@ -17,13 +17,13 @@
 </template>
 
 <script>
-module.exports = {
+export default {
 
-    ready: function () {
+    ready() {
         this.getLists();
     },
 
-    data: function () {
+    data() {
         return {
             lists: [],
         }
@@ -33,7 +33,7 @@ module.exports = {
         /*
          * Get the lists from the API.
          */
-        getLists: function () {
+        getLists() {
             this.$http.get('/api/lists/')
                 .then(function (lists) {
                     this.lists = lists.data;

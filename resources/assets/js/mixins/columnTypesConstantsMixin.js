@@ -59,14 +59,14 @@ window.Spaceport.ColumnTypesConstants = {
 
 window.Spaceport.ColumnTypesMixin = {
 
-    data: function () {
+    data() {
         return {
             ColumnTypes: Spaceport.ColumnTypesConstants
         }
     },
 
     methods: {
-        isValidColumnType: function (type) {
+        isValidColumnType(type) {
             // get an array of all the IDs of the column types
             var values = _.values(Spaceport.ColumnTypesConstants)
 

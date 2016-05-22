@@ -27,13 +27,13 @@
 </template>
 
 <script>
-module.exports = {
+export default {
 
-    ready: function () {
+    ready() {
         this.getColumnTypes();
     },
 
-    data: function () {
+    data() {
         return {
             columnTypes: [],
             forms: {
@@ -47,7 +47,7 @@ module.exports = {
 
     methods: {
 
-        createColumn: function () {
+        createColumn() {
             var self = this;
 
             Spaceport.post('/api/lists/' + this.$route.params.listId + '/columns/create', this.forms.createColumn)
@@ -56,7 +56,7 @@ module.exports = {
                 });
         },
 
-        getColumnTypes: function () {
+        getColumnTypes() {
             var self = this;
 
             this.$http.get('/api/columns/types/')

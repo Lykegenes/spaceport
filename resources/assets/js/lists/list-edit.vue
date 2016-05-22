@@ -25,13 +25,13 @@
 </template>
 
 <script>
-module.exports = {
+export default {
 
-    ready: function () {
+    ready() {
         this.getList(this.$route.params.listId)
     },
 
-    data: function () {
+    data() {
         return {
             list: null,
             forms: {
@@ -43,13 +43,13 @@ module.exports = {
     },
 
     watch: {
-        'list': function(list) {
+        list(list) {
             this.forms.editList.title = list.title
         }
     },
 
     methods: {
-        getList: function (id) {
+        getList(id) {
             var self = this;
 
             this.$http.get('/api/lists/' + id)
@@ -58,7 +58,7 @@ module.exports = {
                 });
         },
 
-        updateList: function () {
+        updateList() {
             var self = this;
 
             Spaceport.put('/api/lists/' + this.list.id, this.forms.editList)
@@ -67,7 +67,7 @@ module.exports = {
                 });
         },
 
-        deleteList: function () {
+        deleteList() {
             var self = this;
 
             Spaceport.delete('/api/lists/' + this.list.id, this.forms.editList)

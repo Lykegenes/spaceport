@@ -13,7 +13,7 @@
 </template>
 
 <script>
-module.exports = {
+export default {
 
     props: {
         loading: {
@@ -42,7 +42,7 @@ module.exports = {
         }
     },
 
-    data () {
+    data() {
         return {
             spinnerStyle: {
                 backgroundColor: this.color,
@@ -62,7 +62,7 @@ module.exports = {
     },
 
     computed: {
-        containerStyle () {
+        containerStyle() {
             return {
                 margin: (this.center ? 'auto' : null),
                 width: parseFloat(this.size) * 3 + parseFloat(this.margin) * 6 + 'px',
@@ -72,7 +72,7 @@ module.exports = {
     },
 
     methods: {
-        animationStyleRandomize () {
+        animationStyleRandomize() {
             return {
                 // Math.random() returns a number between 0 and 1
                 animationDelay: (Math.random() - 0.2) + 's',

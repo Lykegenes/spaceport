@@ -24,20 +24,20 @@
 </template>
 
 <script>
-module.exports = {
+export default {
 
-    ready: function () {
+    ready() {
         this.getColumns();
     },
 
-    data: function () {
+    data() {
         return {
             columns: [],
         }
     },
 
     methods: {
-        getColumns: function () {
+        getColumns() {
             this.$http.get('/api/lists/' + this.$route.params.listId + '/columns')
                 .then(function (columns) {
                     this.columns = columns.data;

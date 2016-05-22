@@ -17,13 +17,13 @@
 </template>
 
 <script>
-module.exports = {
+export default {
 
-    ready: function () {
+    ready() {
         this.getUsers();
     },
 
-    data: function () {
+    data() {
         return {
             users: [],
         }
@@ -33,7 +33,7 @@ module.exports = {
         /*
          * Get the users from the API.
          */
-        getUsers: function () {
+        getUsers() {
             this.$http.get('/api/users/')
                 .then(function (response) {
                     this.users = response.data;

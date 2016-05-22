@@ -24,13 +24,9 @@
 </template>
 
 <script>
-module.exports = {
+export default {
 
-    ready: function () {
-        //
-    },
-
-    data: function () {
+    data() {
         return {
             forms: {
                 inviteUser: new SpaceportForm({
@@ -45,7 +41,7 @@ module.exports = {
         /*
          * Edit a given list.
          */
-        inviteUser: function () {
+        inviteUser() {
             var self = this;
 
             Spaceport.post('/api/users/invite/', this.forms.inviteUser)

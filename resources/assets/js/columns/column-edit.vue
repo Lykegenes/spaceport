@@ -32,16 +32,16 @@
 </template>
 
 <script>
-module.exports = {
+export default {
 
     mixins: [Spaceport.ColumnTypesMixin],
 
-    ready: function () {
+    ready() {
         this.getColumn(this.$route.params.columnId)
         this.getColumnTypes()
     },
 
-    data: function () {
+    data() {
         return {
             column: {
                 type: null
@@ -57,14 +57,14 @@ module.exports = {
     },
 
     watch: {
-        'column': function(column) {
+        column(column) {
             this.forms.editColumn.title = column.title
             this.forms.editColumn.type = column.type
         }
     },
 
     methods: {
-        getColumn: function (id) {
+        getColumn(id) {
             var self = this;
 
             this.$http.get('/api/columns/' + id)
@@ -73,7 +73,7 @@ module.exports = {
                 });
         },
 
-        getColumnTypes: function () {
+        getColumnTypes() {
             var self = this;
 
             this.$http.get('/api/columns/types/')
@@ -82,7 +82,7 @@ module.exports = {
                 });
         },
 
-        updateColumn: function () {
+        updateColumn() {
             var self = this;
 
             Spaceport.put('/api/columns/' + this.$route.params.columnId, this.forms.editColumn)
@@ -91,7 +91,7 @@ module.exports = {
                 });
         },
 
-        deleteColumn: function () {
+        deleteColumn() {
             var self = this;
 
             Spaceport.delete('/api/columns/' + this.column.id, this.forms.editColumn)

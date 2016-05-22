@@ -18,13 +18,9 @@
 </template>
 
 <script>
-module.exports = {
+export default {
 
-    ready: function () {
-        //
-    },
-
-    data: function () {
+    data() {
         return {
             forms: {
                 createList: new SpaceportForm({
@@ -38,7 +34,7 @@ module.exports = {
         /*
          * Edit a given list.
          */
-        createList: function () {
+        createList() {
             var self = this;
 
             Spaceport.post('/api/lists/create/', this.forms.createList)
