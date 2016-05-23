@@ -68,11 +68,12 @@
 </template>
 
 <script>
-    import SpaceportDatagridColumns from 'datagrid/DatagridColumn.js'
+    import SpaceportDatagridColumns from 'datagrid/DatagridColumn.js';
+    import SpaceportColumnTypesMixin from 'mixins/SpaceportColumnTypesMixin.js';
 
     export default {
 
-        mixins: [Spaceport.ColumnTypesMixin],
+        mixins: [SpaceportColumnTypesMixin],
 
         props: {
             columns: Array,

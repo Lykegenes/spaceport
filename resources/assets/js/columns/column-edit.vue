@@ -32,9 +32,11 @@
 </template>
 
 <script>
+import SpaceportColumnTypesMixin from 'mixins/SpaceportColumnTypesMixin.js';
+
 export default {
 
-    mixins: [Spaceport.ColumnTypesMixin],
+    mixins: [SpaceportColumnTypesMixin],
 
     ready() {
         this.getColumn(this.$route.params.columnId)

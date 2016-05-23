@@ -3,11 +3,11 @@
 </template>
 
 <script>
-import TestHeaderMixin from 'mixins/SpaceportHeaderMixin.js'
+import SpaceportHeaderMixin from 'mixins/SpaceportHeaderMixin.js'
 
 export default {
 
-    mixins: [TestHeaderMixin],
+    mixins: [SpaceportHeaderMixin],
 
     ready() {
         this.setBreadcrumb('Settings')

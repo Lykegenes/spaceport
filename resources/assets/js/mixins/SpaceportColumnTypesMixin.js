@@ -1,4 +1,4 @@
-window.Spaceport.ColumnTypesConstants = {
+var SpaceportColumnTypesConstants = {
 
     // 0-100 : IDs and Hashes
     COL_ID: 1,
@@ -57,7 +57,7 @@ window.Spaceport.ColumnTypesConstants = {
     COL_CALCULATED: 900,
 }
 
-window.Spaceport.ColumnTypesMixin = {
+var SpaceportColumnTypesMixin = {
 
     data() {
         return {
@@ -74,3 +74,5 @@ window.Spaceport.ColumnTypesMixin = {
         },
     },
 }
+
+export default SpaceportColumnTypesMixin;

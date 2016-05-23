@@ -63,11 +63,13 @@
 </template>
 
 <script>
-    module.exports = {
+import SpaceportColumnTypesMixin from 'mixins/SpaceportColumnTypesMixin.js';
 
-        mixins: [Spaceport.ColumnTypesMixin],
+export default {
 
-        props: ['type', 'display', 'form', 'name', 'input'],
+    mixins: [SpaceportColumnTypesMixin],
 
-    }
+    props: ['type', 'display', 'form', 'name', 'input'],
+
+}
 </script>
