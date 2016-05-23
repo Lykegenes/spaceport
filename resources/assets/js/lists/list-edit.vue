@@ -25,6 +25,8 @@
 </template>
 
 <script>
+import SpaceportForm from 'forms/SpaceportForm.js';
+
 export default {
 
     ready() {

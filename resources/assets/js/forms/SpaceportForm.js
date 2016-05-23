@@ -44,3 +44,5 @@ class SpaceportForm {
         this.fields = _.extend({}, this.fields, obj)
     };
 };
+
+export default SpaceportForm;

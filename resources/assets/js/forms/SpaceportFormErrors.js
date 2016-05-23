@@ -65,3 +65,5 @@ class SpaceportFormErrors {
         this.errors = {};
     };
 };
+
+export default SpaceportFormErrors;
