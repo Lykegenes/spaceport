@@ -13,11 +13,13 @@
 </template>
 
 <script>
-module.exports = {
+import TestHeaderMixin from 'mixins/SpaceportHeaderMixin.js'
 
-    mixins: [Spaceport.HeaderMixin],
+export default {
 
-    ready: function () {
+    mixins: [TestHeaderMixin],
+
+    ready() {
         this.setBreadcrumb('Lists')
         this.setHeaderTitle('Manage your Lists')
     },

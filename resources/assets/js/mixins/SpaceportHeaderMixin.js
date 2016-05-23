@@ -9,7 +9,7 @@ window.Spaceport.HeaderData = {
 /**
  * Vue Mixin for views titles and breadcrumbs.
  */
-window.Spaceport.HeaderMixin = {
+var SpaceportHeaderMixin = {
 
     methods: {
         setHeaderTitle(text) {
@@ -39,3 +39,5 @@ window.Spaceport.HeaderMixin = {
     },
 
 }
+
+export default SpaceportHeaderMixin;

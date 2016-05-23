@@ -15,7 +15,7 @@ require('./core/components');
  */
 window.SpaceportApp = Vue.extend({
 
-    data: function () {
+    data() {
         return {
             SpaceportHeader: Spaceport.HeaderData,
         }
