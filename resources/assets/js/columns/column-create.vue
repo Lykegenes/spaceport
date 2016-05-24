@@ -28,6 +28,7 @@
 
 <script>
 import SpaceportForm from 'forms/SpaceportForm.js';
+import SpaceportHttpModule from 'forms/SpaceportHttpModule.js';
 
 export default {
 
@@ -52,7 +53,7 @@ export default {
         createColumn() {
             var self = this;
 
-            Spaceport.post('/api/lists/' + this.$route.params.listId + '/columns/create', this.forms.createColumn)
+            SpaceportHttpModule.post('/api/lists/' + this.$route.params.listId + '/columns/create', this.forms.createColumn)
                 .then(function (response) {
                     self.$router.go({name: 'list.show', 'params': { listId: self.$route.params.listId } });
                 });

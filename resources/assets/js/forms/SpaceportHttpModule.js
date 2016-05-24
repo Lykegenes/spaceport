@@ -1,22 +1,22 @@
-module.exports = {
+class SpaceportHttpModule {
     /**
      * A few helper methods for making HTTP requests and doing common form actions.
      */
-    post: function (uri, form) {
-        return Spaceport.sendForm('post', uri, form);
-    },
+    static post(uri, form) {
+        return this.sendForm('post', uri, form);
+    }
 
 
-    put: function (uri, form) {
-        return Spaceport.sendForm('put', uri, form);
-    },
+    static put(uri, form) {
+        return this.sendForm('put', uri, form);
+    }
 
 
-    delete: function (uri, form) {
-        return Spaceport.sendForm('delete', uri, form);
-    },
+    static delete(uri, form) {
+        return this.sendForm('delete', uri, form);
+    }
 
-    sendForm: function (method, uri, form) {
+    static sendForm(method, uri, form) {
         return new Promise(function (resolve, reject) {
             form.startProcessing();
 
@@ -32,5 +32,7 @@ module.exports = {
                     reject(errors);
                 })
         });
-    },
-};
+    }
+}
+
+export default SpaceportHttpModule;

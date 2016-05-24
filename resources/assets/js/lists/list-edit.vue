@@ -26,6 +26,7 @@
 
 <script>
 import SpaceportForm from 'forms/SpaceportForm.js';
+import SpaceportHttpModule from 'forms/SpaceportHttpModule.js';
 
 export default {
 
@@ -63,7 +64,7 @@ export default {
         updateList() {
             var self = this;
 
-            Spaceport.put('/api/lists/' + this.list.id, this.forms.editList)
+            SpaceportHttpModule.put('/api/lists/' + this.list.id, this.forms.editList)
                 .then(function () {
                     self.$router.go({name: 'list.index'});
                 });
@@ -72,7 +73,7 @@ export default {
         deleteList() {
             var self = this;
 
-            Spaceport.delete('/api/lists/' + this.list.id, this.forms.editList)
+            SpaceportHttpModule.delete('/api/lists/' + this.list.id, this.forms.editList)
                 .then(function () {
                     self.$router.go({name: 'list.index'});
                 });

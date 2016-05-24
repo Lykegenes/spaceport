@@ -19,6 +19,7 @@
 
 <script>
 import SpaceportForm from 'forms/SpaceportForm.js';
+import SpaceportHttpModule from 'forms/SpaceportHttpModule.js';
 
 export default {
 
@@ -39,7 +40,7 @@ export default {
         createList() {
             var self = this;
 
-            Spaceport.post('/api/lists/create/', this.forms.createList)
+            SpaceportHttpModule.post('/api/lists/create/', this.forms.createList)
                 .then(function (response) {
                     self.$router.go({name: 'list.index'});
                 });

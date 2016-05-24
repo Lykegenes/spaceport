@@ -34,6 +34,7 @@
 <script>
 import SpaceportColumnTypesMixin from 'mixins/SpaceportColumnTypesMixin.js';
 import SpaceportForm from 'forms/SpaceportForm.js';
+import SpaceportHttpModule from 'forms/SpaceportHttpModule.js';
 
 export default {
 
@@ -88,7 +89,7 @@ export default {
         updateColumn() {
             var self = this;
 
-            Spaceport.put('/api/columns/' + this.$route.params.columnId, this.forms.editColumn)
+            SpaceportHttpModule.put('/api/columns/' + this.$route.params.columnId, this.forms.editColumn)
                 .then(function (response) {
                     self.$router.go({name: 'list.show', 'params': { listId: self.$route.params.listId } });
                 });
@@ -97,7 +98,7 @@ export default {
         deleteColumn() {
             var self = this;
 
-            Spaceport.delete('/api/columns/' + this.column.id, this.forms.editColumn)
+            SpaceportHttpModule.delete('/api/columns/' + this.column.id, this.forms.editColumn)
                 .then(function () {
                     self.$router.go({name: 'list.show', 'params': { listId: self.$route.params.listId } });
                 });
