@@ -5,5 +5,5 @@
         <b>Version</b> 0.0.1
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2015.</strong> Created by <a href="https://patricksamson.ca">Patrick Samson</a>. See code at <a href="https://github.com/lykegenes/spaceport">Github</a>
+    <strong>Copyright &copy; 2016.</strong> Created by <a href="https://patricksamson.ca">Patrick Samson</a>. See code at <a href="https://github.com/lykegenes/spaceport">Github</a>
 </footer>

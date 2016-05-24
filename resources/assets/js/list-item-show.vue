@@ -26,7 +26,11 @@
 </template>
 
 <script>
-module.exports = {
+import SpaceportForm from 'forms/SpaceportForm.js';
+import SpaceportListItem from 'core/SpaceportListItem.js';
+import SpaceportListColumns from 'core/SpaceportListColumns.js';
+
+export default {
 
     ready () {
         this.getListColumns(this.$route.params.listId)
