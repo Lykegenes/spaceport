@@ -7,9 +7,6 @@ php:
   - 7.0
   - hhvm
 
-services:
-  - mysql
-
 env:
   global:
     - setup=basic
@@ -19,10 +16,8 @@ env:
 
 cache:
   directories:
-    - vendor
     - node_modules
     - $HOME/.composer/cache
-    - $HOME/.npm
 
 before_install:
   - nvm install node
@@ -35,7 +30,6 @@ install:
 before_script:
   - cp .env.travis .env
   - gulp --production
-  - mysql -e 'create database spaceport;'
 
 script:
   - vendor/bin/phpunit
