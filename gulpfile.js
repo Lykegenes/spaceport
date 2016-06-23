@@ -21,7 +21,7 @@ elixir(function(mix) {
         .copy('node_modules/bootstrap-sass/assets/fonts/bootstrap', 'public/dist/fonts');
 
     // Exclude vendors from Spaceport.js
-    elixir.config.js.browserify.externals.push('vue', 'vue-resource', 'vue-router','vue-hot-reload-api', 'underscore');
+    elixir.config.js.browserify.externals.push('vue', 'vue-resource', 'vue-router', 'underscore');
 
     // Compile the external vendors in their own file
     mix.vendor('core/vendor.js', 'public/dist/js/vendor.js');
