@@ -22,12 +22,12 @@ $factory->define(Spaceport\User::class, function (Faker\Generator $faker) {
 
 $factory->define(Spaceport\Liste::class, function (Faker\Generator $faker) {
     return [
-        'title' => $faker->title,
+        'title' => $faker->word,
     ];
 });
 
 $factory->define(Spaceport\Column::class, function (Faker\Generator $faker) {
     return [
-        'title' => $faker->title,
+        'title' => $faker->word,
     ];
 });

@@ -29,7 +29,7 @@ install:
 
 before_script:
   - cp .env.travis .env
-  - gulp --production
+  #- gulp --production
 
 script:
   - vendor/bin/phpunit
