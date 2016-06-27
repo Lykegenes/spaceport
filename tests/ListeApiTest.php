@@ -33,14 +33,14 @@ class ListeApiTest extends TestCase
         // simple title
         $this->json('POST', '/api/lists/create', [
                 'title' => 'title',
-            ]);
-        $this->assertTrue(Schema::hasTable(Spaceport\Liste::SQL_TABLE_PREFIX . 'title'));
+            ])
+            ->assertTrue(Schema::hasTable(Spaceport\Liste::SQL_TABLE_PREFIX . 'title'));
 
         // title with spaces
         $this->json('POST', '/api/lists/create', [
                 'title' => 'title with spaces',
-            ]);
-        $this->assertTrue(Schema::hasTable(Spaceport\Liste::SQL_TABLE_PREFIX . 'title with spaces'));
+            ])
+            ->assertTrue(Schema::hasTable(Spaceport\Liste::SQL_TABLE_PREFIX . 'title with spaces'));
     }
 
     /** @test */
@@ -66,9 +66,6 @@ class ListeApiTest extends TestCase
                 'title' => 'an updated title',
             ])
             ->seeInDatabase('lists', ['title' => 'an updated title']);
-
-        // TODO
-        //$this->assertTrue(Schema::hasTable(Spaceport\Liste::SQL_TABLE_PREFIX . 'an updated title'));
     }
 
     /** @test */
@@ -76,8 +73,10 @@ class ListeApiTest extends TestCase
     {
         $liste = Spaceport\Liste::create(['title' => 'some title']);
 
-        $this->json('DELETE', '/api/lists/'.$liste->id);
-        $this->dontSeeInDatabase('lists', ['title' => 'some title']);
-        $this->assertFalse(Schema::hasTable(Spaceport\Liste::SQL_TABLE_PREFIX . 'some title'));
+        $this->seeInDatabase('lists', ['title' => 'some title']);
+
+        $this->json('DELETE', '/api/lists/'.$liste->id)
+            ->dontSeeInDatabase('lists', ['title' => 'some title'])
+            ->assertFalse(Schema::hasTable(Spaceport\Liste::SQL_TABLE_PREFIX . 'some title'));
     }
 }

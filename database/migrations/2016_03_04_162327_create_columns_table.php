@@ -17,7 +17,7 @@ class CreateColumnsTable extends Migration
             $table->integer('list_id');
             $table->integer('type');
             $table->text('title');
-            $table->boolean('is_required');
+            $table->boolean('is_required')->default(false);
             $table->timestamps();
         });
     }
