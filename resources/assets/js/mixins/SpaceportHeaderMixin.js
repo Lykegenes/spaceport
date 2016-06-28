@@ -40,4 +40,4 @@ var SpaceportHeaderMixin = {
 
 }
 
-export default SpaceportHeaderMixin;
+module.exports = SpaceportHeaderMixin;

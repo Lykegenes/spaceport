@@ -1,6 +1,6 @@
 import SpaceportFormErrors from './SpaceportFormErrors.js'
 
-class SpaceportForm {
+module.exports = class SpaceportForm {
 
     constructor(data) {
         _.extend(this, data)
@@ -44,5 +44,3 @@ class SpaceportForm {
         this.fields = _.extend({}, this.fields, obj)
     };
 };
-
-export default SpaceportForm;

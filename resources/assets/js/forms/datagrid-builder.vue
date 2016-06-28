@@ -68,7 +68,7 @@
 </template>
 
 <script>
-    import SpaceportDatagridColumns from 'datagrid/DatagridColumns.js';
+    import DatagridColumns from 'datagrid/DatagridColumns.js';
     import SpaceportColumnTypesMixin from 'mixins/SpaceportColumnTypesMixin.js';
 
     export default {
@@ -131,7 +131,7 @@
         data() {
             return {
                 loading: false,
-                datagridColumns: new SpaceportDatagridColumns(),
+                datagridColumns: new DatagridColumns(),
                 headers: [
                     {key: 'id', name: 'Id'},
                     {key: 'task', name: 'Task'},

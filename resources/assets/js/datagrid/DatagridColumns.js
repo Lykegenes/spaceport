@@ -1,4 +1,4 @@
-class SpaceportDatagridColumns {
+module.exports = class SpaceportDatagridColumns {
 
     constructor() {
         this.columns = {};
@@ -19,8 +19,6 @@ class SpaceportDatagridColumns {
 
         // We must extend a new Object to trigger Vue.js reactivity.
         this.columns = _.extend({}, this.columns, obj)
-    };
+    }
 
 }
-
-export default SpaceportDatagridColumns;

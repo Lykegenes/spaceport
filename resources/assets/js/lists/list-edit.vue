@@ -73,7 +73,7 @@ export default {
         deleteList() {
             var self = this;
 
-            SpaceportHttpModule.delete('/api/lists/' + this.list.id, this.forms.editList)
+            SpaceportHttpModule.deleteForm('/api/lists/' + this.list.id, this.forms.editList)
                 .then(function () {
                     self.$router.go({name: 'list.index'});
                 });

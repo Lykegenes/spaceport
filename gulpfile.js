@@ -1,6 +1,5 @@
 var elixir = require('laravel-elixir');
-require('laravel-elixir-vueify');
-require('./elixir-vendor');
+require('laravel-elixir-vue');
 
 /*
  |--------------------------------------------------------------------------
@@ -20,14 +19,14 @@ elixir(function(mix) {
         .copy('node_modules/font-awesome/fonts', 'public/dist/fonts')
         .copy('node_modules/bootstrap-sass/assets/fonts/bootstrap', 'public/dist/fonts');
 
-    // Exclude vendors from Spaceport.js
-    elixir.config.js.browserify.externals.push('vue', 'vue-resource', 'vue-router', 'underscore');
-
     // Compile the external vendors in their own file
-    mix.vendor('core/vendor.js', 'public/dist/js/vendor.js');
+    mix.scripts('core/vendor.js', 'public/dist/js/vendor.js');
 
     // Compile the Spaceport Vue application
-    mix.browserify('spaceport.js', 'public/dist/js/spaceport.js', null, {
-        paths: ['./node_modules', './resources/assets/js']
+    mix.scripts('spaceport.js', 'public/dist/js/spaceport.js', null, {
+        resolve : {
+            modules: [ "resources/assets/js", "node_modules" ]
+        }
     });
+
 });

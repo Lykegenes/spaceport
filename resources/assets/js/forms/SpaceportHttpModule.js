@@ -1,4 +1,4 @@
-class SpaceportHttpModule {
+module.exports = class SpaceportHttpModule {
     /**
      * A few helper methods for making HTTP requests and doing common form actions.
      */
@@ -12,7 +12,7 @@ class SpaceportHttpModule {
     }
 
 
-    static delete(uri, form) {
+    static deleteForm(uri, form) {
         return this.sendForm('delete', uri, form);
     }
 
@@ -34,5 +34,3 @@ class SpaceportHttpModule {
         });
     }
 }
-
-export default SpaceportHttpModule;

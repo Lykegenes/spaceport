@@ -98,7 +98,7 @@ export default {
         deleteColumn() {
             var self = this;
 
-            SpaceportHttpModule.delete('/api/columns/' + this.column.id, this.forms.editColumn)
+            SpaceportHttpModule.deleteForm('/api/columns/' + this.column.id, this.forms.editColumn)
                 .then(function () {
                     self.$router.go({name: 'list.show', 'params': { listId: self.$route.params.listId } });
                 });
