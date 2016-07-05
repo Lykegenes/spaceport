@@ -36,7 +36,7 @@ export default {
         getUsers() {
             this.$http.get('/api/users/')
                 .then(function (response) {
-                    this.users = response.data;
+                    this.users = response.json();
                 });
         },
     },

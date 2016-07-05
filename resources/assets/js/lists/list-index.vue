@@ -35,8 +35,8 @@ export default {
          */
         getLists() {
             this.$http.get('/api/lists/')
-                .then(function (lists) {
-                    this.lists = lists.data;
+                .then(function (response) {
+                    this.lists = response.json();
                 });
         },
     },

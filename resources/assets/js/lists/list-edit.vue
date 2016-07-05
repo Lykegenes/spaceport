@@ -57,7 +57,7 @@ export default {
 
             this.$http.get('/api/lists/' + id)
                 .then(function (response) {
-                    self.list = response.data;
+                    self.list = response.json();
                 });
         },
 

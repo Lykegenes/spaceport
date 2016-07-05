@@ -43,7 +43,7 @@ module.exports = {
 
             this.$http.get('/api/lists/' + id + '/columns')
                 .then(function (response) {
-                    self.columns = response.data;
+                    self.columns = response.json();
                     self.compileColumnsToFormFields()
                     self.$log()
                 });

@@ -39,8 +39,8 @@ export default {
     methods: {
         getColumns() {
             this.$http.get('/api/lists/' + this.$route.params.listId + '/columns')
-                .then(function (columns) {
-                    this.columns = columns.data;
+                .then(function (response) {
+                    this.columns = response.json();
                 });
         },
     },

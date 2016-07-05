@@ -73,7 +73,7 @@ export default {
 
             this.$http.get('/api/columns/' + id)
                 .then(function (response) {
-                    self.column = response.data;
+                    self.column = response.json();
                 });
         },
 
@@ -82,7 +82,7 @@ export default {
 
             this.$http.get('/api/columns/types/')
                 .then(function (response) {
-                    self.columnTypes = response.data;
+                    self.columnTypes = response.json();
                 });
         },
 

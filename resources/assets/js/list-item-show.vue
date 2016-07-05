@@ -50,7 +50,7 @@ export default {
         getListColumns (listId) {
             this.$http.get('/api/lists/' + listId + '/columns')
                 .then(function (response) {
-                    this.listColumns.set(response.data)
+                    this.listColumns.set(response.json())
                     this.getListItem(this.$route.params.listId, this.$route.params.itemId)
                     this.form.initFormFieldsFromListColumnsDefaults(this.listColumns)
                 });
@@ -59,7 +59,7 @@ export default {
         getListItem (listId, itemId) {
             this.$http.get('/api/lists/' + listId + '/item/' + itemId)
                 .then(function (response) {
-                    this.listItem.set(response.data)
+                    this.listItem.set(response.json())
                     this.form.fillFormFieldsFromListItem(this.listColumns, this.listItem)
                 });
         },
